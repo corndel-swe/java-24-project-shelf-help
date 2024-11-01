@@ -31,3 +31,13 @@ CREATE TABLE IF NOT EXISTS reading_lists (
     is_read INTEGER NOT NULL DEFAULT 0,
     tag TEXT
 );
+
+-- Create the 'reviews' table with a timestamp
+CREATE TABLE IF NOT EXISTS reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER REFERENCES users(id),
+    book_id INTEGER REFERENCES books(id),
+    content TEXT NOT NULL,
+    rating INTEGER NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+);
