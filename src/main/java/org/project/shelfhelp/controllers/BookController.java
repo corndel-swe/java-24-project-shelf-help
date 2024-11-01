@@ -1,9 +1,12 @@
 package org.project.shelfhelp.controllers;
 
-public class BookController {
-    public void addBook() {
+import io.javalin.http.*;
 
+public class BookController {
+    public static int addBook(Context ctx) {
+        return 1;
     }
-    public void removeBook() {
+    public static int removeBook(Context ctx) {
+        return 1;
     }
 }
