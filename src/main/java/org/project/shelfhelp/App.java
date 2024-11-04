@@ -2,10 +2,13 @@ package org.project.shelfhelp;
 
 import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
+import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-import io.javalin.rendering.template.JavalinThymeleaf;
+//import io.javalin.rendering.template.JavalinThymeleaf;
+import java.util.Map;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
@@ -19,21 +22,7 @@ public class App {
 
     public App() {
 
-        app = Javalin.create(config -> {
-            config.router.apiBuilder(() -> {
-                path("/book", () -> {
-                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
-                    post("/addBook/{bookId}", BookController::addBook);
-                    get("/removeBook", BookController::removeBook);
-                    // GET http://localhost:8080/book/id/2
-                    get("/id/{bookId}", BookController::getBookById);
-                    // http://localhost:8080/book?title=The Great Gatsby
-                    get("/", BookController::getBookByTitle);
-                });
-            });
-        });
-
-        var app = Javalin.create(
+        app = Javalin.create(
                 config -> {
                     config.staticFiles.add("/public", Location.CLASSPATH);
 
@@ -47,6 +36,18 @@ public class App {
 
                     config.fileRenderer(new JavalinThymeleaf(engine));
                 });
+
+        app
+                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
+                .post("/addBook/{bookId}", BookController::addBook)
+                .get("/removeBook", BookController::removeBook)
+                    // GET http://localhost:8080/book/id/2
+                .get("/id/{bookId}", BookController::getBookById)
+                    // http://localhost:8080/book?title=The Great Gatsby
+                .get("/", BookController::getBookByTitle)
+                .get("/index", ctx -> {
+                        ctx.render("index.html");
+                    });
 
 
 

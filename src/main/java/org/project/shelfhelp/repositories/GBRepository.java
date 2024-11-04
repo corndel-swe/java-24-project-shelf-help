@@ -25,7 +25,7 @@ public class GBRepository {
         JsonNode bookTree = mapper.readTree(book);
 
         // FOR DEBUGGING
-//     System.out.println(bookTree);
+     System.out.println(bookTree);
 
         JsonNode volumeInfo = bookTree.get("volumeInfo");
         JsonNode imageLinks = volumeInfo.get("imageLinks");
@@ -121,14 +121,14 @@ public class GBRepository {
     }
 
     // HERE FOR DEBUGGING
-//public static void main(String[] args) throws Exception {
-//    GBRepository.getABookbyId("buc0AAAAMAAJ");
-//    System.out.println("-------");
-//
-//    GBRepository.getBooksByTitle("twilight");
-//    System.out.println("-------");
-//    GBRepository.getBooksByAuthor("lewis");
-//}
+public static void main(String[] args) throws Exception {
+    GBRepository.getABookbyId("buc0AAAAMAAJ");
+    System.out.println("-------");
+
+    GBRepository.getBooksByTitle("twilight");
+    System.out.println("-------");
+    GBRepository.getBooksByAuthor("lewis");
+}
 
 
 }
