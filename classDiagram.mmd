@@ -1,0 +1,60 @@
+classDiagram
+    App -- Books
+    App -- Users
+    App -- ReadingList
+    App -- GBApi
+    ReadingListRepository -- ReadingList
+    Books -- BookRepository
+    UserRepository -- Users
+    GBApi -- Books
+    App : Run app
+    class Books{
+        String id
+        String title
+        String author
+        int year
+        String genre
+        String summary
+        String bookCover
+    }
+    class BookRepository{
+        addBook()
+        removeBook()
+    }
+
+    class Users{
+        String id
+        String firstName
+        String lastName
+        String username
+        String password (optional)
+        String avatar (optional)
+    }
+
+    class UserRepository{
+        login()
+        addUser()
+        deleteUser()
+        updatePassword() (optional)
+    }
+
+    class ReadingList{
+        bool bookRead
+        String tag
+        String review
+    }
+
+    class ReadingListRepository{
+        addTag()
+        markAsRead()
+        addReview()
+        getReadingStatistics()
+    }
+
+    class GBApi{
+        getBookById()
+        getBookByGenre()
+        getBookByAuthor()
+        getRandomBook()
+    }
+
