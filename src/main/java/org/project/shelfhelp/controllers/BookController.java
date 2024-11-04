@@ -10,7 +10,6 @@ import java.sql.SQLException;
 public class BookController {
     public static void addBook(Context ctx) throws Exception {
         var id = ctx.pathParam("bookId");
-
         Book book = GBRepository.getABookbyId(id);
         System.out.println(book);
         Book addedBook = BookRepository.addBook(
