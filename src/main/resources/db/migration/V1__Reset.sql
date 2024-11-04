@@ -8,7 +8,7 @@ CREATE TABLE IF NOT EXISTS books (
     title TEXT NOT NULL,
     author TEXT NOT NULL,
     release_year INTEGER NOT NULL,
-    genre TEXT NOT NULL,
+    average_rating FLOAT NOT NULL,
     summary TEXT NOT NULL,
     cover_url TEXT NOT NULL
 );
