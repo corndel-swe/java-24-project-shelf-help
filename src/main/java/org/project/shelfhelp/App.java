@@ -23,11 +23,13 @@ public class App {
                     get("/addBook", BookController::addBook);
                     get("/removeBook", BookController::removeBook);
                     post("/login", UserController::getUser);
+                    post("/register", UserController::addNewUser);
                 });
             });
         });
 
         app.exception(Exception.class, (e, ctx) -> {
+            e.printStackTrace();
             ctx.status(500);
             ctx.result("An unknown error occurred.");
         });
