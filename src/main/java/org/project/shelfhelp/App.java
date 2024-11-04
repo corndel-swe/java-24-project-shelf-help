@@ -18,7 +18,8 @@ public class App {
         app = Javalin.create(config -> {
             config.router.apiBuilder(() -> {
                 path("/book", () -> {
-                    post("/addBook", BookController::addBook);
+                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
+                    post("/addBook/{bookId}", BookController::addBook);
                     get("/removeBook", BookController::removeBook);
                     // GET http://localhost:8080/book/id/2
                     get("/id/{bookId}", BookController::getBookById);
