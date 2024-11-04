@@ -43,11 +43,9 @@ public class BookRepository {
     public static List<Book> findByTitle(String title) throws SQLException {
         var query = "SELECT * FROM books WHERE title LIKE ?";
 
-        // Try with resources - get connection
         try (var con = DB.getConnection();
              var stmt = con.prepareStatement(query);) {
 
-            // Use '%' wildcards to find similar titles
             stmt.setString(1, "%" + title + "%");
 
             try (var rs = stmt.executeQuery();) {
@@ -65,7 +63,7 @@ public class BookRepository {
                     books.add(new Book(bookTitle, author, year, genre, bookSummary, bookCover));
                 }
 
-                return books; // Return the list of matching books
+                return books;
             }
         }
     }
