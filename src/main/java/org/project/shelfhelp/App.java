@@ -2,6 +2,8 @@ package org.project.shelfhelp;
 
 import io.javalin.Javalin;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.controllers.UserController;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
@@ -20,6 +22,7 @@ public class App {
                 path("/products", () -> {
                     get("/addBook", BookController::addBook);
                     get("/removeBook", BookController::removeBook);
+                    post("/login", UserController::getUser);
                 });
             });
         });
