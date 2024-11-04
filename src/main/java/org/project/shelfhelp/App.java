@@ -29,6 +29,8 @@ public class App {
             });
         });
 
+
+
         app.exception(Exception.class, (e, ctx) -> {
             ctx.status(500);
             ctx.result("An unknown error occurred.");

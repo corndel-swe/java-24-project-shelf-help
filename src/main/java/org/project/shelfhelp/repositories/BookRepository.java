@@ -27,7 +27,7 @@ public class BookRepository {
                     var bookId = rs.getString("id");
                     var title = rs.getString("title");
                     var author = rs.getString("author");
-                    var year = rs.getInt("release_year");
+                    var year = rs.getString("release_year");
                     var averageRating = rs.getFloat("average_rating");
                     var bookSummary= rs.getString("summary");
                     var bookCover = rs.getString("cover_url");
@@ -56,7 +56,7 @@ public class BookRepository {
                     var bookId = rs.getString("id");
                     var bookTitle = rs.getString("title");
                     var author = rs.getString("author");
-                    var year = rs.getInt("release_year");
+                    var year = rs.getString("release_year");
                     var averageRating = rs.getFloat("average_rating");
                     var bookSummary = rs.getString("summary");
                     var bookCover = rs.getString("cover_url");
@@ -70,7 +70,7 @@ public class BookRepository {
     }
 
 
-    public static Book addBook(String id, String bookTitle, String bookAuthor, int release_year, float average_rate , String summary, String cover_url) throws SQLException {
+    public static Book addBook(String id, String bookTitle, String bookAuthor, String release_year, float average_rate , String summary, String cover_url) throws SQLException {
         var query = "INSERT INTO books (id, title, author, release_year, average_rating, summary,cover_url) VALUES (?, ?, ?, ?,?, ?,?) RETURNING *";
 
         try (var con = DB.getConnection();
@@ -80,7 +80,7 @@ public class BookRepository {
             statement.setString(1, id);
             statement.setString(2, bookTitle);
             statement.setString(3, bookAuthor);
-            statement.setInt(4, release_year);
+            statement.setString(4, release_year);
             statement.setFloat(5,average_rate);
             statement.setString(6,summary);
             statement.setString(7,cover_url);
@@ -90,7 +90,7 @@ public class BookRepository {
                     var bookId = rs.getString("id");
                     var title = rs.getString("title");
                     var author = rs.getString("author");
-                    var year = rs.getInt("release_year");
+                    var year = rs.getString("release_year");
                     var averageRating = rs.getFloat("average_rating");
                     var bookSummary= rs.getString("summary");
                     var bookCover = rs.getString("cover_url");
