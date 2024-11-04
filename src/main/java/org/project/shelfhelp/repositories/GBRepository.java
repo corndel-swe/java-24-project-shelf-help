@@ -44,7 +44,7 @@ public class GBRepository {
         System.out.println("book cover: " + bookCover);
         System.out.println("rating: " + averagePublicRating);
 
-//            return null;
+//            return null; // here for debugging
         return new Book(id, title, author, year, averagePublicRating, summary, bookCover);
     }
 
@@ -80,7 +80,7 @@ public class GBRepository {
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
-//        return null;
+//        return null;// here for debugging
         return bookList;
     }
 
@@ -116,8 +116,11 @@ public class GBRepository {
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
+//        return null;// here for debugging
         return bookList;
     }
+
+    // HERE FOR DEBUGGING
 //public static void main(String[] args) throws Exception {
 ////    GBRepository.getABookbyId("buc0AAAAMAAJ");
 ////    GBRepository.getBooksByTitle("narnia");
