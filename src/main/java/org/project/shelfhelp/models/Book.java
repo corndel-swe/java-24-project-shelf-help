@@ -1,6 +1,7 @@
 package org.project.shelfhelp.models;
 
 public class Book {
+    private String id;
     private String title;
     private String author;
     private int year;
@@ -8,8 +9,8 @@ public class Book {
     private String bookSummary;
     private String bookCover;
 
-    public Book(String title, String author, int year, float averageRating, String bookSummary, String bookCover) {
-
+    public Book(String id , String title, String author, int year, float averageRating, String bookSummary, String bookCover) {
+        this.id = id;
         this.title = title;
         this.author = author;
         this.year = year;
@@ -70,12 +71,21 @@ public class Book {
     @Override
     public String toString() {
         return "Book{" +
-                "title='" + title + '\'' +
+                "id='" + id + '\'' +
+                ", title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                ", averageRating='" + averageRating + '\'' +
+                ", averageRating=" + averageRating +
                 ", bookSummary='" + bookSummary + '\'' +
                 ", bookCover='" + bookCover + '\'' +
                 '}';
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }
