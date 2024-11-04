@@ -20,19 +20,16 @@ public class BookRepository {
         WHERE books.id = ?
     """;
 
-        // Try-with-resources for connection and statement
+        Book book = null;
         try (var con = DB.getConnection();
              var stmt = con.prepareStatement(query)) {
 
             stmt.setString(1, id);
 
             try (var rs = stmt.executeQuery()) {
-                Book book = null;
                 List<Review> reviews = new ArrayList<>();
 
                 while (rs.next()) {
-                    // Initialize the book object only once
-                    if (book == null) {
                         var bookId = rs.getString("id");
                         var title = rs.getString("title");
                         var author = rs.getString("author");
@@ -40,28 +37,22 @@ public class BookRepository {
                         var averageRating = rs.getFloat("average_rating");
                         var bookSummary = rs.getString("summary");
                         var bookCover = rs.getString("cover_url");
-                        book = new Book(bookId, title, author, year, averageRating, bookSummary, bookCover, reviews);
-                    }
+                   book =  new Book(bookId, title, author, year, averageRating, bookSummary, bookCover, reviews);
 
-                    // Retrieve review data if present in the current row
+
+
                     var reviewId = rs.getInt("review_id");
-                    if (reviewId != 0) {  // If review exists
                         var userId = rs.getInt("user_id");
                         var content = rs.getString("content");
                         var rating = rs.getInt("rating");
                         var createdAt = rs.getTimestamp("created_at");
                         reviews.add(new Review(reviewId, userId, content, rating, createdAt));
                     }
-                }
 
-                if (book != null) {
-                    return book;
-                } else {
-                    System.out.println("Not a valid ID.");
-                    return null;
-                }
+
             }
         }
+        return book;
     }
 
     public static List<Book> findByTitle(String title) throws SQLException {
