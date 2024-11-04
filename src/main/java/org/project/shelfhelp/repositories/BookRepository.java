@@ -2,6 +2,7 @@ package org.project.shelfhelp.repositories;
 
 import org.project.shelfhelp.DB;
 import org.project.shelfhelp.models.Book;
+import org.project.shelfhelp.models.Review;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -11,30 +12,52 @@ public class BookRepository {
 
     public static Book findById(String id) throws SQLException {
 
-        var query = "SELECT *\n";
-        query += "FROM books \n";
-        query += ("WHERE id = ?");
+        var query = """
+        SELECT books.*, reviews.id AS review_id, reviews.user_id, reviews.content,
+               reviews.rating, reviews.created_at
+        FROM books
+        LEFT JOIN reviews ON books.id = reviews.book_id
+        WHERE books.id = ?
+    """;
 
-        // try with resources - get connection
+        // Try-with-resources for connection and statement
         try (var con = DB.getConnection();
-             var stmt = con.prepareStatement(query);) {
+             var stmt = con.prepareStatement(query)) {
 
             stmt.setString(1, id);
 
-            try (var rs = stmt.executeQuery();){
+            try (var rs = stmt.executeQuery()) {
+                Book book = null;
+                List<Review> reviews = new ArrayList<>();
 
-                if(rs.next()){
-                    var bookId = rs.getString("id");
-                    var title = rs.getString("title");
-                    var author = rs.getString("author");
-                    var year = rs.getString("release_year");
-                    var averageRating = rs.getFloat("average_rating");
-                    var bookSummary= rs.getString("summary");
-                    var bookCover = rs.getString("cover_url");
+                while (rs.next()) {
+                    // Initialize the book object only once
+                    if (book == null) {
+                        var bookId = rs.getString("id");
+                        var title = rs.getString("title");
+                        var author = rs.getString("author");
+                        var year = rs.getString("release_year");
+                        var averageRating = rs.getFloat("average_rating");
+                        var bookSummary = rs.getString("summary");
+                        var bookCover = rs.getString("cover_url");
+                        book = new Book(bookId, title, author, year, averageRating, bookSummary, bookCover, reviews);
+                    }
 
-                    return new Book(bookId,title, author, year, averageRating, bookSummary, bookCover);
-                }else{
-                    System.out.println("not a valid id.");
+                    // Retrieve review data if present in the current row
+                    var reviewId = rs.getInt("review_id");
+                    if (reviewId != 0) {  // If review exists
+                        var userId = rs.getInt("user_id");
+                        var content = rs.getString("content");
+                        var rating = rs.getInt("rating");
+                        var createdAt = rs.getTimestamp("created_at");
+                        reviews.add(new Review(reviewId, userId, content, rating, createdAt));
+                    }
+                }
+
+                if (book != null) {
+                    return book;
+                } else {
+                    System.out.println("Not a valid ID.");
                     return null;
                 }
             }
@@ -113,16 +136,16 @@ public class BookRepository {
         var bookByTitle= BookRepository.findByTitle("To Kill a Mockingbird");
         System.out.println(bookByTitle);
         // create// add book
-   Book addedbook = GBRepository.getABookbyId("AePeEAAAQBAJ");
-        var addedBook = BookRepository.addBook(
-                addedbook.getId(),
-                addedbook.getTitle(),
-                addedbook.getAuthor(),
-                addedbook.getYear(),
-                addedbook.getAverageRating(),
-                addedbook.getBookSummary(),
-                addedbook.getBookCover()
-        );
-        System.out.println(addedBook);
+//   Book addedbook = GBRepository.getABookbyId("AePeEAAAQBAJ");
+//        var addedBook = BookRepository.addBook(
+//                addedbook.getId(),
+//                addedbook.getTitle(),
+//                addedbook.getAuthor(),
+//                addedbook.getYear(),
+//                addedbook.getAverageRating(),
+//                addedbook.getBookSummary(),
+//                addedbook.getBookCover()
+//        );
+//        System.out.println(addedBook);
     }
 }
