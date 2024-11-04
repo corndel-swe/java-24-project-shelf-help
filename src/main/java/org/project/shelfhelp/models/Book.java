@@ -4,16 +4,16 @@ public class Book {
     private String title;
     private String author;
     private int year;
-    private String genre;
+    private float averageRating;
     private String bookSummary;
     private String bookCover;
 
-    public Book(String title, String author, int year, String genre, String bookSummary, String bookCover) {
+    public Book(String title, String author, int year, float averageRating, String bookSummary, String bookCover) {
 
         this.title = title;
         this.author = author;
         this.year = year;
-        this.genre = genre;
+        this.averageRating = averageRating;
         this.bookSummary = bookSummary;
         this.bookCover = bookCover;
 
@@ -43,12 +43,12 @@ public class Book {
         this.year = year;
     }
 
-    public String getGenre() {
-        return genre;
+    public float getAverageRating() {
+        return averageRating;
     }
 
-    public void setGenre(String genre) {
-        this.genre = genre;
+    public void setAverageRating(float averageRating) {
+        this.averageRating = averageRating;
     }
 
     public String getBookSummary() {
@@ -73,7 +73,7 @@ public class Book {
                 "title='" + title + '\'' +
                 ", author='" + author + '\'' +
                 ", year=" + year +
-                ", genre='" + genre + '\'' +
+                ", averageRating='" + averageRating + '\'' +
                 ", bookSummary='" + bookSummary + '\'' +
                 ", bookCover='" + bookCover + '\'' +
                 '}';

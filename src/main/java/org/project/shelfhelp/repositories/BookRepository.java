@@ -27,11 +27,11 @@ public class BookRepository {
                     var title = rs.getString("title");
                     var author = rs.getString("author");
                     var year = rs.getInt("release_year");
-                    var genre = rs.getString("genre");
+                    var averageRating = rs.getFloat("average_rating");
                     var bookSummary= rs.getString("summary");
                     var bookCover = rs.getString("cover_url");
 
-                    return new Book(title, author, year, genre, bookSummary, bookCover);
+                    return new Book(title, author, year, averageRating, bookSummary, bookCover);
                 }else{
                     System.out.println("not a valid id.");
                     return null;
@@ -56,11 +56,11 @@ public class BookRepository {
                     var bookTitle = rs.getString("title");
                     var author = rs.getString("author");
                     var year = rs.getInt("release_year");
-                    var genre = rs.getString("genre");
+                    var averageRating = rs.getFloat("average_rating");
                     var bookSummary = rs.getString("summary");
                     var bookCover = rs.getString("cover_url");
 
-                    books.add(new Book(bookTitle, author, year, genre, bookSummary, bookCover));
+                    books.add(new Book(bookTitle, author, year, averageRating, bookSummary, bookCover));
                 }
 
                 return books;
