@@ -68,7 +68,7 @@ public class GBRepository {
         for (JsonNode i: books){
             JsonNode volumeInfo = i.get("volumeInfo");
             JsonNode imageLinks = volumeInfo.get("imageLinks");
-            System.out.println(volumeInfo);
+            System.out.println("titleAPI"+volumeInfo);
 
             String id = String.valueOf(volumeInfo.get("id"));
             String author = String.valueOf(volumeInfo.get("authors"));
@@ -104,7 +104,7 @@ public class GBRepository {
         for (JsonNode i: books){
             JsonNode volumeInfo = i.get("volumeInfo");
             JsonNode imageLinks = volumeInfo.get("imageLinks");
-          System.out.println(volumeInfo);
+          System.out.println(volumeInfo + "author");
 
             String id = String.valueOf(volumeInfo.get("id"));
             String title = String.valueOf(volumeInfo.get("title"));
