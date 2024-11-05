@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 //import io.javalin.rendering.template.JavalinThymeleaf;
@@ -38,19 +39,32 @@ public class App {
                 });
 
         app
-                .post("/addBook/{bookId}", BookController::addBook)
-                .get("/removeBook", BookController::removeBook)
+                    // http://localhost:8080/book/addBook/PLlOCUIAh88C
+                .post("/book/addBook/{bookId}", BookController::addBook
+                )
+                // http://localhost:8080/books/search?title=The Great Gatsby
+                .get("/books/search", BookController::SearchRender)
+
+                // http://localhost:8080/book/removeBook/PLlOCUIAh88C
+                .delete("/book/removeBook/{bookId}", BookController::removeBook)
                     // GET http://localhost:8080/book/id/2
-                .get("/id/{bookId}", BookController::getBookById)
+                .get("/book/id/{bookId}", BookController::getBookById)
+
                     // http://localhost:8080/book?title=The Great Gatsby
-                .get("/", BookController::getBookByTitle)
+                .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
                         ctx.render("index.html");
                     })
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
-                .post("/register", UserController::addNewUser);;
+                .post("/register", UserController::addNewUser)
+
+
+            .put("/setTag", EntryController::setTag)
+            .put("/markAsRead", EntryController::markAsRead)
+            .get("/getStats", EntryController::getStats);
+
 
 
 

@@ -2,16 +2,20 @@ package org.project.shelfhelp.controllers;
 
 import io.javalin.http.*;
 import org.project.shelfhelp.models.Book;
+import org.project.shelfhelp.models.Entry;
 import org.project.shelfhelp.repositories.BookRepository;
+import org.project.shelfhelp.repositories.EntryRepository;
 import org.project.shelfhelp.repositories.GBRepository;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 public class BookController {
 
     public static void addBook(Context ctx) throws Exception {
-        var id = ctx.pathParam("bookId");
-        Book book = GBRepository.getABookbyId(id);
+        var bookId = ctx.pathParam("bookId");
+        Book book = GBRepository.getABookbyId(bookId);
         System.out.println(book);
         Book addedBook = BookRepository.addBook(
                 book.getId(),
@@ -22,6 +26,9 @@ public class BookController {
                 book.getBookSummary(),
                 book.getBookCover()
         );
+//        int userId = ctx.sessionAttribute("id");
+        // hardcoding userId as 1 until we fix it properly with sessionAttribute
+        Entry entry = EntryRepository.createEntry(1, bookId);
         ctx.status(201).json(addedBook);
 
 }
@@ -37,8 +44,6 @@ public class BookController {
                 }
 
     }
-
-
 
 
     // get book by id
@@ -60,4 +65,14 @@ public class BookController {
         }
         ctx.status(200).json(bookByTitle);
     }
-}
+
+    public static void  SearchRender(Context ctx) throws Exception {
+        String title = ctx.queryParam("title");
+        String author = ctx.queryParam("author");
+        List<Book> booksByTitle = GBRepository.getBooksByTitle(title);
+        List<Book> booksByAuthor = GBRepository.getBooksByTitle(author);
+        ctx.render("/searchPage.html", Map.of("books", booksByTitle));
+    }
+
+
+}// end of BookController

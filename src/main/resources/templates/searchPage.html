@@ -1,20 +1,24 @@
 <!doctype html>
-<html lang="en">
+<html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>Search</title>
 </head>
 <body>
 <header th:replace = "fragments :: header">
 </header>
-
 <main>
-Stuff goes here
+<div>
+<ul>
+    <li th:each="book : ${books}">
+        <h3 th:text="${book.title}">Book Title</h3>
+        <p th:text="${book.author}">Author</p>
+    </li>
+</ul>
+</div>
 </main>
-
-<footer th:replace = "fragments :: footer"></footer>
-
+<footer></footer>
 </body>
 </html>
