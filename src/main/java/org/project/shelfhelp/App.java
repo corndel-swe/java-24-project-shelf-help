@@ -38,7 +38,6 @@ public class App {
                 });
 
         app
-                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
                 .post("/addBook/{bookId}", BookController::addBook)
                 .get("/removeBook", BookController::removeBook)
                     // GET http://localhost:8080/book/id/2
@@ -48,6 +47,7 @@ public class App {
                 .get("/index", ctx -> {
                         ctx.render("index.html");
                     })
+                .get("/login", UserController::renderForm)
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser);;
 

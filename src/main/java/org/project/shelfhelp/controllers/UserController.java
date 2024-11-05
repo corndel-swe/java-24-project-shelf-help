@@ -19,12 +19,11 @@ public class UserController {
 
         // redirect
         if(user != null){
-            ctx.sessionAttribute("user", user);
+            ctx.sessionAttribute("id", user.getId());
             ctx.status(200);
-            ctx.redirect("/index/" + user.getId());
+            ctx.redirect("/login/" + user.getId());
         } else {
             ctx.status(401);
-            ctx.redirect("/login");
         }
 
     }
@@ -37,6 +36,12 @@ public class UserController {
         /*
             // if using a form - grab each parameter to pass into User constructor
             String username = ctx.formParamAsClass("username", String.class).get();
+            String firstName = ctx.formParamAsClass("firstName", String.class).get();
+            String lastName = ctx.formParamAsClass("lastName", String.class).get();
+            String email = ctx.formParamAsClass("email", String.class).get();
+            String avatarUrl = ctx.formParamAsClass("avatarUrl", String.class).get();
+
+            UserDTO body = new UserDTO(firstName, lastName, username, password, avatarUrl);
          */
 
         System.out.println(body);
@@ -46,5 +51,9 @@ public class UserController {
         }else{
             throw new BadRequestResponse("unable to add user.");
         }
+    }
+
+    public static void renderForm(Context ctx) {
+        ctx.render("/login.html");
     }
 }
