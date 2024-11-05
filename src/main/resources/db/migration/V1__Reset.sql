@@ -4,11 +4,11 @@ DROP TABLE IF EXISTS reading_lists;
 
 -- Create the 'books' table
 CREATE TABLE IF NOT EXISTS books (
-    id TEXT PRIMARY KEY NOT NULL,
+    id TEXT PRIMARY KEY NOT NULL UNIQUE,
     title TEXT NOT NULL,
     author TEXT NOT NULL,
     release_year INTEGER NOT NULL,
-    genre TEXT NOT NULL,
+    average_rating FLOAT NOT NULL,
     summary TEXT NOT NULL,
     cover_url TEXT NOT NULL
 );

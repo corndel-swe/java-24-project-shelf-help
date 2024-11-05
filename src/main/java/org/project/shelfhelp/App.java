@@ -1,10 +1,15 @@
 package org.project.shelfhelp;
 
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
+import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+//import io.javalin.rendering.template.JavalinThymeleaf;
+
 import org.project.shelfhelp.controllers.UserController;
 
-import static io.javalin.apibuilder.ApiBuilder.*;
 
 
 public class App {
@@ -17,23 +22,42 @@ public class App {
 
     public App() {
 
-        app = Javalin.create(config -> {
-            config.router.apiBuilder(() -> {
-                path("/products", () -> {
-                    get("/addBook", BookController::addBook);
-                    get("/removeBook", BookController::removeBook);
-                    post("/login", UserController::getUser);
-                    post("/register", UserController::addNewUser);
+        app = Javalin.create(
+                config -> {
+                    config.staticFiles.add("/public", Location.CLASSPATH);
+
+                    var resolver = new ClassLoaderTemplateResolver();
+                    resolver.setPrefix("/templates/");
+                    resolver.setSuffix(".html");
+                    resolver.setTemplateMode("HTML");
+
+                    var engine = new TemplateEngine();
+                    engine.setTemplateResolver(resolver);
+
+                    config.fileRenderer(new JavalinThymeleaf(engine));
                 });
-            });
-        });
+
+        app
+                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
+                .post("/addBook/{bookId}", BookController::addBook)
+                .get("/removeBook", BookController::removeBook)
+                    // GET http://localhost:8080/book/id/2
+                .get("/id/{bookId}", BookController::getBookById)
+                    // http://localhost:8080/book?title=The Great Gatsby
+                .get("/", BookController::getBookByTitle)
+                .get("/index", ctx -> {
+                        ctx.render("index.html");
+                    })
+                .post("/login", UserController::getUser)
+                .post("/register", UserController::addNewUser);;
+
+
 
         app.exception(Exception.class, (e, ctx) -> {
-            e.printStackTrace();
             ctx.status(500);
             ctx.result("An unknown error occurred.");
+            e.printStackTrace();
         });
-
     }
 
     public Javalin javalinApp() {
