@@ -55,7 +55,10 @@ public class App {
                     // http://localhost:8080/book?title=The Great Gatsby
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
-                        ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
+                        ctx.render("index.html",
+                                Map.of("username",
+                                            ctx.sessionAttribute("username") != null ?
+                                                ctx.sessionAttribute("username") != null : ""));
                     })
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
