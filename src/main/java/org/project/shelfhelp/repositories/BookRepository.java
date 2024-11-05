@@ -82,7 +82,25 @@ public class BookRepository {
             }
         }
     }
+    public static Book deleteBook(String id) throws SQLException {
+        var query = "DELETE FROM books WHERE id = ?";
+        try (var connection = DB.getConnection();
+             var statement = connection.prepareStatement(query)) {
+            statement.setString(1, id);
 
+            System.out.println(statement);
+
+            int deletedRow = statement.executeUpdate();
+            System.out.println(deletedRow);
+            if (deletedRow > 0){
+                System.out.println("book Deleted by ID " + id);
+                return new Book(id);
+            } else {
+                System.out.println("no book found by ID " + id );
+                return null;
+            }
+        }
+    }
 
     public static Book addBook(String id, String bookTitle, String bookAuthor, String release_year, float average_rate , String summary, String cover_url) throws SQLException {
         var query = "INSERT INTO books (id, title, author, release_year, average_rating, summary,cover_url) VALUES (?, ?, ?, ?,?, ?,?) RETURNING *";
@@ -126,17 +144,20 @@ public class BookRepository {
         // by bookTitle
         var bookByTitle= BookRepository.findByTitle("To Kill a Mockingbird");
         System.out.println(bookByTitle);
+        // delete book
+        var bookDelete = BookRepository.deleteBook("k7hIAw5WmmwC");
+        System.out.println(bookDelete);
         // create// add book
-//   Book addedbook = GBRepository.getABookbyId("AePeEAAAQBAJ");
-//        var addedBook = BookRepository.addBook(
-//                addedbook.getId(),
-//                addedbook.getTitle(),
-//                addedbook.getAuthor(),
-//                addedbook.getYear(),
-//                addedbook.getAverageRating(),
-//                addedbook.getBookSummary(),
-//                addedbook.getBookCover()
-//        );
-//        System.out.println(addedBook);
+   Book addedbook = GBRepository.getABookbyId("k7hIAw5WmmwC");
+        var addedBook = BookRepository.addBook(
+                addedbook.getId(),
+                addedbook.getTitle(),
+                addedbook.getAuthor(),
+                addedbook.getYear(),
+                addedbook.getAverageRating(),
+                addedbook.getBookSummary(),
+                addedbook.getBookCover()
+        );
+        System.out.println(addedBook);
     }
 }

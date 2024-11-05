@@ -35,6 +35,9 @@ public class Book {
         this.reviews = reviews;
     }
 
+    public Book(String id) {
+    }
+
 
     public String getTitle() {
         return title;
