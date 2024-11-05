@@ -60,10 +60,9 @@ public class App {
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser)
 
-
-            .put("/setTag", EntryController::setTag)
-            .put("/markAsRead", EntryController::markAsRead)
-            .get("/getStats", EntryController::getStats);
+                .put("/setTag", EntryController::setTag)
+                .put("/markAsRead", EntryController::markAsRead)
+                .get("/getStats", EntryController::getStats);
 
 
 

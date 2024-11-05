@@ -29,8 +29,7 @@ public class UserRepository {
                     String lastName = rs.getString("last_name");
                     String password = rs.getString("password");
                     String avatar = rs.getString("avatar_url");
-
-                    return new User(id, username, firstName, lastName, password, avatar);
+                    return new User(id, avatar, password, username, lastName, firstName);
 
 
                 } else {
@@ -45,8 +44,6 @@ public class UserRepository {
         String query = "INSERT INTO users \n";
         query += "(first_name, last_name, username, password, avatar_url) \n";
         query += ("VALUES (?, ?, ?, ?, ?); \n");
-
-        System.out.println(query);
 
         // try with resources - get connection
         try (var con = DB.getConnection();

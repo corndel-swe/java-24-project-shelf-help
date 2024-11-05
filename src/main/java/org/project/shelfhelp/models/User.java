@@ -8,15 +8,6 @@ public class User {
     private String password;
     private String avatarUrl;
 
-    public User(String avatarUrl, String password, String username, String lastName, String firstName) {
-        this.id = -999;
-        this.avatarUrl = avatarUrl;
-        this.password = password;
-        this.username = username;
-        this.lastName = lastName;
-        this.firstName = firstName;
-    }
-
     public User(int id, String avatarUrl, String password, String username, String lastName, String firstName) {
         this.id = id;
         this.avatarUrl = avatarUrl;

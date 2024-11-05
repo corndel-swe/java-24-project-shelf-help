@@ -5,6 +5,7 @@ import org.project.shelfhelp.models.UserDTO;
 import org.project.shelfhelp.repositories.UserRepository;
 
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class UserController {
 
@@ -12,15 +13,12 @@ public class UserController {
 
         // get the username
         String username = ctx.formParamAsClass("username", String.class).get();
-        // String password = ctx.formParamAsClass("password", String.class).get();
+        String password = ctx.formParamAsClass("password", String.class).get();
 
         // check the username exists in database
         User user = UserRepository.findUser(username);
-
-
-
         // redirect
-        if(user != null){
+        if(user != null && user.getPassword().equals(password)){
             ctx.sessionAttribute("id", user.getId());
             ctx.status(200);
             ctx.redirect("/index/");
@@ -37,26 +35,22 @@ public class UserController {
         // if details supplied as a json..
         //UserDTO body = ctx.bodyAsClass(UserDTO.class);
 
+        // if using a form - grab each parameter to pass into User constructor
+        String username = ctx.formParamAsClass("username", String.class).get();
+        String firstName = ctx.formParamAsClass("firstName", String.class).get();
+        String lastName = ctx.formParamAsClass("lastName", String.class).get();
+        String password = ctx.formParamAsClass("password", String.class).get();
+        String avatarUrl = ctx.formParamAsClass("avatarUrl", String.class).get();
 
-            // if using a form - grab each parameter to pass into User constructor
-            String username = ctx.formParamAsClass("username", String.class).get();
-            String firstName = ctx.formParamAsClass("firstName", String.class).get();
-            String lastName = ctx.formParamAsClass("lastName", String.class).get();
-            String password = ctx.formParamAsClass("email", String.class).get();
-            String avatarUrl = ctx.formParamAsClass("avatarUrl", String.class).get();
+        UserDTO body = new UserDTO(firstName, lastName, username, password, avatarUrl);
 
-            UserDTO body = new UserDTO(firstName, lastName, username, password, avatarUrl);
-
-            // add some validation - does username already exist?
-            // add some client side password validation
-
-        System.out.println(body);
         int response = UserRepository.insertNewUser(body);
         if(response!=-1){
             System.out.println(response);
-            ctx.redirect("/index");
             ctx.status(201);
+            ctx.redirect("/index");
         }else{
+            ctx.status(400);
             throw new BadRequestResponse("unable to add user.");
         }
     }
