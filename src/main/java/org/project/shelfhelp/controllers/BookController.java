@@ -66,11 +66,14 @@ public class BookController {
     }
 
     public static void  SearchRender(Context ctx) throws Exception {
-        String title = ctx.queryParam("title");
-        String author = ctx.queryParam("author");
-        List<Book> booksByTitle = GBRepository.getBooksByTitle(title);
-        List<Book> booksByAuthor = GBRepository.getBooksByTitle(author);
+        String searchInput = ctx.queryParam("searchInput");
+        System.out.println(searchInput);
+        List<Book> booksByAuthor = GBRepository.getBooksByAuthor(searchInput);
+        List<Book> booksByTitle = GBRepository.getBooksByTitle(searchInput);
+
         ctx.render("/searchPage.html", Map.of("books", booksByTitle));
+        ctx.render("/searchPage.html", Map.of("books", booksByAuthor));
+        ctx.status(200);
     }
 
 

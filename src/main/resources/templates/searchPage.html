@@ -7,18 +7,26 @@
     <title>Search</title>
 </head>
 <body>
-<header th:replace = "fragments :: header">
-</header>
+<header th:replace="~{fragments :: header}"></header>
 <main>
-<div>
-<ul>
-    <li th:each="book : ${books}">
-        <h3 th:text="${book.title}">Book Title</h3>
-        <p th:text="${book.author}">Author</p>
-    </li>
-</ul>
-</div>
+    <div>
+        <div class="searchForm">
+        <form action="/books/search" method="get">
+            <div class="InputContainer">
+                <label for="input"></label>
+                <input placeholder="Search book by title or author" id="input" class="input" name="searchInput" type="text">
+            </div>
+        </form>
+        </div>
+        <div class="searchContainer">
+            <div class="book" th:each="book : ${books}">
+                <h3 th:text="${book.title}">Book Title</h3>
+                <p th:text="${book.author}">Authors: </p>
+            </div>
+        </div>
+
+    </div>
 </main>
-<footer></footer>
+<footer th:fragment="footer"></footer>
 </body>
 </html>
