@@ -47,7 +47,8 @@ public class App {
                 .get("/index", ctx -> {
                         ctx.render("index.html");
                     })
-                .get("/login", UserController::renderForm)
+                .get("/login", UserController::renderLoginForm)
+                .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser);;
 

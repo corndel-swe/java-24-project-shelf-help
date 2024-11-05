@@ -25,10 +25,10 @@ public class UserRepository {
 
                 if (rs.next()) {
                     int id = rs.getInt("id");
-                    String firstName = rs.getString("firstName");
-                    String lastName = rs.getString("lastName");
+                    String firstName = rs.getString("first_name");
+                    String lastName = rs.getString("last_name");
                     String password = rs.getString("password");
-                    String avatar = rs.getString("avatar");
+                    String avatar = rs.getString("avatar_url");
 
                     return new User(id, username, firstName, lastName, password, avatar);
 
@@ -51,8 +51,6 @@ public class UserRepository {
         // try with resources - get connection
         try (var con = DB.getConnection();
              var stmt = con.prepareStatement(query);) {
-
-            System.out.println("this far");
 
             stmt.setString(1, newUser.firstName());
             stmt.setString(2, newUser.lastName());
