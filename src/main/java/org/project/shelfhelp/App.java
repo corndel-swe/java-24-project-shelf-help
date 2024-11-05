@@ -7,10 +7,6 @@ import org.project.shelfhelp.controllers.BookController;
 import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-//import io.javalin.rendering.template.JavalinThymeleaf;
-import java.util.Map;
-
-import static io.javalin.apibuilder.ApiBuilder.*;
 
 
 public class App {
