@@ -10,6 +10,9 @@ import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import org.project.shelfhelp.controllers.UserController;
+
+
 import java.util.Map;
 
 
@@ -53,7 +56,7 @@ public class App {
                     // http://localhost:8080/book?title=The Great Gatsby
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
-                        ctx.render("index.html");
+                        ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
                     })
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
@@ -66,9 +69,13 @@ public class App {
                     ctx.render("readingList.html", Map.of("entries", entries));
 
                 })
-            .put("/setTag", EntryController::setTag)
-            .put("/markAsRead", EntryController::markAsRead)
-            .get("/getStats", EntryController::getStats);
+                .put("/setTag", EntryController::setTag)
+                .put("/markAsRead", EntryController::markAsRead)
+                .get("/getStats", EntryController::getStats)
+                .get("/login", UserController::renderLoginForm)
+                .get("/register", UserController::renderRegisterForm)
+                .post("/login", UserController::getUser)
+                .post("/register", UserController::addNewUser);
 
 
 
