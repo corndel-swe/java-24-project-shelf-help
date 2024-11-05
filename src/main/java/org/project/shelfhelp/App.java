@@ -4,13 +4,15 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.repositories.GBRepository;
 import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-//import io.javalin.rendering.template.JavalinThymeleaf;
 
 import org.project.shelfhelp.controllers.UserController;
 
+
+import java.util.Map;
 
 
 public class App {
@@ -55,14 +57,18 @@ public class App {
                 .get("/index", ctx -> {
                         ctx.render("index.html");
                     })
+                .get("/details/{bookId}", ctx -> {
+                    var id = ctx.pathParam("bookId");
+                    var book = GBRepository.getABookbyId(id);
+                    ctx.render("bookDetails.html", Map.of("b",book));
+                })
+            .put("/setTag", EntryController::setTag)
+            .put("/markAsRead", EntryController::markAsRead)
+            .get("/getStats", EntryController::getStats)
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
-                .post("/register", UserController::addNewUser)
-
-                .put("/setTag", EntryController::setTag)
-                .put("/markAsRead", EntryController::markAsRead)
-                .get("/getStats", EntryController::getStats);
+                .post("/register", UserController::addNewUser);
 
 
 
