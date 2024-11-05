@@ -29,11 +29,15 @@ public class GBRepository {
 
         JsonNode volumeInfo = bookTree.get("volumeInfo");
         JsonNode imageLinks = volumeInfo.get("imageLinks");
+        List<String> authorList = new ArrayList<>();
 
-        String title = String.valueOf(volumeInfo.get("title"));
-        String author = String.valueOf(volumeInfo.get("authors"));
+        for (JsonNode item : volumeInfo.get("authors")){
+            authorList.add(item.asText());
+        }
+        String title = String.valueOf(volumeInfo.get("title")).replace("\"","");
+        String author = String.join(", ", authorList);
         String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
-        String summary = String.valueOf(volumeInfo.get("description"));
+        String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
         String bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
@@ -122,14 +126,14 @@ public class GBRepository {
     }
 
     //// HERE FOR DEBUGGING
-//public static void main(String[] args) throws Exception {
-//    GBRepository.getABookbyId("buc0AAAAMAAJ");
-//    System.out.println("-------");
-//
-//    GBRepository.getBooksByTitle("twilight");
-//    System.out.println("-------");
-//    GBRepository.getBooksByAuthor("meyers");
-//}
+public static void main(String[] args) throws Exception {
+    GBRepository.getABookbyId("Cta5AAAAIAAJ");
+    System.out.println("-------");
+
+    GBRepository.getBooksByTitle("twilight");
+    System.out.println("-------");
+    GBRepository.getBooksByAuthor("meyers");
+}
 
 
 }
