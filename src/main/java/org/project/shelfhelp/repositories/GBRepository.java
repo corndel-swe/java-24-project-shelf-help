@@ -133,14 +133,14 @@ public class GBRepository {
     }
 
     //// HERE FOR DEBUGGING
-public static void main(String[] args) throws Exception {
-    GBRepository.getABookbyId("Cta5AAAAIAAJ");
-    System.out.println("-------");
-
-    GBRepository.getBooksByTitle("twilight");
-    System.out.println("-------");
-    GBRepository.getBooksByAuthor("meyers");
-}
+//public static void main(String[] args) throws Exception {
+//    GBRepository.getABookbyId("Cta5AAAAIAAJ");
+//    System.out.println("-------");
+//
+//    GBRepository.getBooksByTitle("twilight");
+//    System.out.println("-------");
+//    GBRepository.getBooksByAuthor("meyers");
+//}
 
 
 }

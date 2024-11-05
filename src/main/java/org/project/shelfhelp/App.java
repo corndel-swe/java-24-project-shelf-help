@@ -9,6 +9,8 @@ import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 
+import java.util.Map;
+
 
 public class App {
     private Javalin app;
@@ -56,9 +58,7 @@ public class App {
                     var id = ctx.pathParam("bookId");
                     var book = GBRepository.getABookbyId(id);
                     ctx.render("bookDetails.html", Map.of("b",book));
-                });
-
-                    })
+                })
             .put("/setTag", EntryController::setTag)
             .put("/markAsRead", EntryController::markAsRead)
             .get("/getStats", EntryController::getStats);
