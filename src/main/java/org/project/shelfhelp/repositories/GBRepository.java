@@ -68,9 +68,9 @@ public class GBRepository {
         for (JsonNode i: books){
             JsonNode volumeInfo = i.get("volumeInfo");
             JsonNode imageLinks = volumeInfo.get("imageLinks");
-            System.out.println(volumeInfo);
+//            System.out.println(volumeInfo);
 
-            String id = String.valueOf(volumeInfo.get("id"));
+            String id = String.valueOf(i.get("id"));
             String author = String.valueOf(volumeInfo.get("authors"));
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
             String summary = String.valueOf(volumeInfo.get("description"));
@@ -78,9 +78,10 @@ public class GBRepository {
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
+//            System.out.println(bookList); // DEBUGGING
 
         }
-//        return null;// here for debugging
+//        return null;// DEBUGGING
         return bookList;
     }
 
@@ -104,9 +105,9 @@ public class GBRepository {
         for (JsonNode i: books){
             JsonNode volumeInfo = i.get("volumeInfo");
             JsonNode imageLinks = volumeInfo.get("imageLinks");
-          System.out.println(volumeInfo);
+//          System.out.println(volumeInfo); //DEBUGGING
 
-            String id = String.valueOf(volumeInfo.get("id"));
+            String id = String.valueOf(i.get("id"));
             String title = String.valueOf(volumeInfo.get("title"));
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
             String summary = String.valueOf(volumeInfo.get("description"));
@@ -116,19 +117,19 @@ public class GBRepository {
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
-//        return null;// here for debugging
+//        return null;// DEBUGGING
         return bookList;
     }
 
-    // HERE FOR DEBUGGING
-public static void main(String[] args) throws Exception {
-    GBRepository.getABookbyId("buc0AAAAMAAJ");
-    System.out.println("-------");
-
-    GBRepository.getBooksByTitle("twilight");
-    System.out.println("-------");
-    GBRepository.getBooksByAuthor("lewis");
-}
+    //// HERE FOR DEBUGGING
+//public static void main(String[] args) throws Exception {
+//    GBRepository.getABookbyId("buc0AAAAMAAJ");
+//    System.out.println("-------");
+//
+//    GBRepository.getBooksByTitle("twilight");
+//    System.out.println("-------");
+//    GBRepository.getBooksByAuthor("meyers");
+//}
 
 
 }
