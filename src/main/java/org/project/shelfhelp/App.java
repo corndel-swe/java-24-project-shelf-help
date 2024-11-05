@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
 //import io.javalin.rendering.template.JavalinThymeleaf;
@@ -49,7 +50,10 @@ public class App {
                 .get("/index", ctx -> {
                         ctx.render("index.html");
 
-                    });
+                    })
+            .put("/setTag", EntryController::setTag)
+            .put("/markAsRead", EntryController::markAsRead)
+            .get("/getStats", EntryController::getStats);
 
 
 

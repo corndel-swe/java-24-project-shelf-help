@@ -2,7 +2,9 @@ package org.project.shelfhelp.controllers;
 
 import io.javalin.http.*;
 import org.project.shelfhelp.models.Book;
+import org.project.shelfhelp.models.Entry;
 import org.project.shelfhelp.repositories.BookRepository;
+import org.project.shelfhelp.repositories.EntryRepository;
 import org.project.shelfhelp.repositories.GBRepository;
 
 import java.sql.SQLException;
@@ -10,8 +12,8 @@ import java.sql.SQLException;
 public class BookController {
 
     public static void addBook(Context ctx) throws Exception {
-        var id = ctx.pathParam("bookId");
-        Book book = GBRepository.getABookbyId(id);
+        var bookId = ctx.pathParam("bookId");
+        Book book = GBRepository.getABookbyId(bookId);
         System.out.println(book);
         Book addedBook = BookRepository.addBook(
                 book.getId(),
@@ -22,6 +24,8 @@ public class BookController {
                 book.getBookSummary(),
                 book.getBookCover()
         );
+        int userId = ctx.sessionAttribute("id");
+        Entry entry = EntryRepository.createEntry(userId, bookId);
         ctx.status(201).json(addedBook);
 
 }
@@ -37,8 +41,6 @@ public class BookController {
                 }
 
     }
-
-
 
 
     // get book by id
