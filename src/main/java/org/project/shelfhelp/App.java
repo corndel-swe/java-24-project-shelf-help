@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.repositories.EntryRepository;
 import org.project.shelfhelp.repositories.GBRepository;
 import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
@@ -61,6 +62,12 @@ public class App {
                     var id = ctx.pathParam("bookId");
                     var book = GBRepository.getABookbyId(id);
                     ctx.render("bookDetails.html", Map.of("b",book));
+                })
+                .get("/readingList", ctx -> {
+                    var id = 1;
+                    var entries = EntryRepository.findByUser(id);
+                    ctx.render("readingList.html", Map.of("entries", entries));
+
                 })
                 .put("/setTag", EntryController::setTag)
                 .put("/markAsRead", EntryController::markAsRead)
