@@ -29,12 +29,16 @@ public class GBRepository {
 
         JsonNode volumeInfo = bookTree.get("volumeInfo");
         JsonNode imageLinks = volumeInfo.get("imageLinks");
+        List<String> authorList = new ArrayList<>();
 
-        String title = String.valueOf(volumeInfo.get("title"));
-        String author = String.valueOf(volumeInfo.get("authors"));
+        for (JsonNode item : volumeInfo.get("authors")){
+            authorList.add(item.asText());
+        }
+        String title = String.valueOf(volumeInfo.get("title")).replace("\"","");
+        String author = String.join(", ", authorList);
         String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
-        String summary = String.valueOf(volumeInfo.get("description"));
-        String bookCover = String.valueOf(imageLinks.get("thumbnail"));
+        String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
+        String bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
         System.out.println("title: " + title);
@@ -62,7 +66,6 @@ public class GBRepository {
 //        // FOR DEBUGGING
 //        System.out.println(bookTree);
         var books = bookTree.get("items"); // Gets an individual book
-        var individualBook = bookTree.get("items").get(2); // Gets an individual book
         List<Book> bookList = new ArrayList<>();
 
         for (JsonNode i: books){
@@ -70,17 +73,24 @@ public class GBRepository {
             JsonNode imageLinks = volumeInfo.get("imageLinks");
 //            System.out.println(volumeInfo);
 
-            String id = String.valueOf(i.get("id"));
-            String author = String.valueOf(volumeInfo.get("authors"));
+            List<String> authorList = new ArrayList<>();
+
+            for (JsonNode item : volumeInfo.get("authors")){
+                authorList.add(item.asText());
+            }
+
+            String id = String.valueOf(i.get("id")).replace("\"","");
+            String author = String.join(", ", authorList);
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
-            String summary = String.valueOf(volumeInfo.get("description"));
-            String bookCover = String.valueOf(imageLinks.get("thumbnail"));
+            String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
+            String bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
-//            System.out.println(bookList); // DEBUGGING
+            // DEBUGGING
 
         }
+        System.out.println(bookList);
 //        return null;// DEBUGGING
         return bookList;
     }
@@ -107,29 +117,30 @@ public class GBRepository {
             JsonNode imageLinks = volumeInfo.get("imageLinks");
 //          System.out.println(volumeInfo); //DEBUGGING
 
-            String id = String.valueOf(i.get("id"));
-            String title = String.valueOf(volumeInfo.get("title"));
+            String id = String.valueOf(i.get("id")).replace("\"","");
+            String title = String.valueOf(volumeInfo.get("title")).replace("\"","");
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
-            String summary = String.valueOf(volumeInfo.get("description"));
-            String bookCover = String.valueOf(imageLinks.get("thumbnail"));
+            String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
+            String bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
+        System.out.println(bookList);
 //        return null;// DEBUGGING
         return bookList;
     }
 
     //// HERE FOR DEBUGGING
-//public static void main(String[] args) throws Exception {
-//    GBRepository.getABookbyId("buc0AAAAMAAJ");
-//    System.out.println("-------");
-//
-//    GBRepository.getBooksByTitle("twilight");
-//    System.out.println("-------");
-//    GBRepository.getBooksByAuthor("meyers");
-//}
+public static void main(String[] args) throws Exception {
+    GBRepository.getABookbyId("Cta5AAAAIAAJ");
+    System.out.println("-------");
+
+    GBRepository.getBooksByTitle("twilight");
+    System.out.println("-------");
+    GBRepository.getBooksByAuthor("meyers");
+}
 
 
 }

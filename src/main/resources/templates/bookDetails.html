@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>Title</title>
+</head>
+<body>
+<header th:replace = "fragments :: header">
+</header>
+
+<main>
+    <section th:each="book : ${b}" class="container">
+        <div th:text="${book.id}"></div>
+        <div th:text="${book.title}"></div>
+        <img th:src="${book.bookCover}"/>
+        <div th:text="${book.author}"></div>
+        <div th:text="${book.year}"></div>
+        <div th:text="${book.averageRating}"></div>
+        <div th:text="${book.bookSummary}"></div>
+
+
+    </section>
+</main>
+
+<footer th:replace = "fragments :: footer"></footer>
+
+</body>
+</html>
