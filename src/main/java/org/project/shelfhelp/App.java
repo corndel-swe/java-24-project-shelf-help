@@ -2,8 +2,6 @@ package org.project.shelfhelp;
 
 import io.javalin.Javalin;
 import org.project.shelfhelp.controllers.BookController;
-import org.project.shelfhelp.controllers.ReadingListController;
-
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
@@ -19,19 +17,25 @@ public class App {
 
         app = Javalin.create(config -> {
             config.router.apiBuilder(() -> {
-                path("/products", () -> {
-//                    get("/addBook", BookController::addBook);
-//                    get("/removeBook", BookController::removeBook);
-                    post("/addEntry", ReadingListController::createEntry);
+                path("/book", () -> {
+                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
+                    post("/addBook/{bookId}", BookController::addBook);
+                    get("/removeBook", BookController::removeBook);
+                    // GET http://localhost:8080/book/id/2
+                    get("/id/{bookId}", BookController::getBookById);
+                    // http://localhost:8080/book?title=The Great Gatsby
+                    get("/", BookController::getBookByTitle);
                 });
             });
         });
 
+
+
         app.exception(Exception.class, (e, ctx) -> {
             ctx.status(500);
             ctx.result("An unknown error occurred.");
+            e.printStackTrace();
         });
-
     }
 
     public Javalin javalinApp() {
