@@ -20,6 +20,7 @@ public class UserController {
         // redirect
         if(user != null && user.getPassword().equals(password)){
             ctx.sessionAttribute("id", user.getId());
+            ctx.sessionAttribute("username", user.getUsername());
             ctx.status(200);
             ctx.redirect("/index/");
         } else {
@@ -31,9 +32,6 @@ public class UserController {
     }
 
     public static void addNewUser(Context ctx) throws Exception {
-
-        // if details supplied as a json..
-        //UserDTO body = ctx.bodyAsClass(UserDTO.class);
 
         // if using a form - grab each parameter to pass into User constructor
         String username = ctx.formParamAsClass("username", String.class).get();

@@ -55,16 +55,16 @@ public class App {
                     // http://localhost:8080/book?title=The Great Gatsby
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
-                        ctx.render("index.html");
+                        ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
                     })
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
                     var book = GBRepository.getABookbyId(id);
                     ctx.render("bookDetails.html", Map.of("b",book));
                 })
-            .put("/setTag", EntryController::setTag)
-            .put("/markAsRead", EntryController::markAsRead)
-            .get("/getStats", EntryController::getStats)
+                .put("/setTag", EntryController::setTag)
+                .put("/markAsRead", EntryController::markAsRead)
+                .get("/getStats", EntryController::getStats)
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
