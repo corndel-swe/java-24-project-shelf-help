@@ -1,18 +1,25 @@
 package org.project.shelfhelp.models;
 
-public class ReadingListEntry {
+public class Entry {
     private int userId;
-    private int bookId;
+    private String bookId;
     private boolean isRead = false;
     private String tag;
 
-    public ReadingListEntry() {};
+    public Entry() {};
 
-    public ReadingListEntry(int userId, int bookId, String tag) {
+    public Entry(int userId, String bookId, String tag) {
         this.userId = userId;
         this.bookId = bookId;
         this.isRead = false;
         this.tag = tag;
+    }
+
+    public Entry(int userId, String bookId) {
+        this.userId = userId;
+        this.bookId = bookId;
+        this.isRead = false;
+        this.tag = null;
     }
 
     public int getUserId() {
@@ -23,11 +30,11 @@ public class ReadingListEntry {
         this.userId = userId;
     }
 
-    public int getBookId() {
+    public String getBookId() {
         return this.bookId;
     }
 
-    public void setBookId(int bookId) {
+    public void setBookId(String bookId) {
         this.bookId = bookId;
     }
 

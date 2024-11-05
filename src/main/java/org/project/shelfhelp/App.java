@@ -2,6 +2,8 @@ package org.project.shelfhelp;
 
 import io.javalin.Javalin;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.controllers.EntryController;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
@@ -25,6 +27,11 @@ public class App {
                     get("/id/{bookId}", BookController::getBookById);
                     // http://localhost:8080/book?title=The Great Gatsby
                     get("/", BookController::getBookByTitle);
+                });
+                path("/entry", () -> {
+                    put("/setTag", EntryController::setTag);
+                    put("/markAsRead", EntryController::markAsRead);
+                    get("/getStats", EntryController::getStats);
                 });
             });
         });
