@@ -39,13 +39,18 @@ public class App {
 
         app
                     // http://localhost:8080/book/addBook/PLlOCUIAh88C
-                .post("/book/addBook/{bookId}", BookController::addBook)
+                .post("/book/addBook/{bookId}", BookController::addBook
+                )
+                // http://localhost:8080/books/search?title=The Great Gatsby
+                .get("/books/search", BookController::SearchRender)
+
                 // http://localhost:8080/book/removeBook/PLlOCUIAh88C
                 .delete("/book/removeBook/{bookId}", BookController::removeBook)
                     // GET http://localhost:8080/book/id/2
                 .get("/book/id/{bookId}", BookController::getBookById)
+
                     // http://localhost:8080/book?title=The Great Gatsby
-                .get("/", BookController::getBookByTitle)
+                .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
                         ctx.render("index.html");
 

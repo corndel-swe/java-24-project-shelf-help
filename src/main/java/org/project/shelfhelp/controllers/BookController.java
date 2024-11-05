@@ -6,6 +6,8 @@ import org.project.shelfhelp.repositories.BookRepository;
 import org.project.shelfhelp.repositories.GBRepository;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.Map;
 
 public class BookController {
 
@@ -39,8 +41,6 @@ public class BookController {
     }
 
 
-
-
     // get book by id
     public static void  getBookById(Context ctx) throws SQLException {
             var id = ctx.pathParam("bookId");
@@ -60,4 +60,14 @@ public class BookController {
         }
         ctx.status(200).json(bookByTitle);
     }
-}
+
+    public static void  SearchRender(Context ctx) throws Exception {
+        String title = ctx.queryParam("title");
+        String author = ctx.queryParam("author");
+        List<Book> booksByTitle = GBRepository.getBooksByTitle(title);
+        List<Book> booksByAuthor = GBRepository.getBooksByTitle(author);
+        ctx.render("/searchPage.html", Map.of("books", booksByTitle));
+    }
+
+
+}// end of BookController
