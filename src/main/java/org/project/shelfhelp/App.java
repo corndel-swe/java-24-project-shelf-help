@@ -2,6 +2,8 @@ package org.project.shelfhelp;
 
 import io.javalin.Javalin;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.controllers.ReadingListController;
+
 import static io.javalin.apibuilder.ApiBuilder.*;
 
 
@@ -18,8 +20,9 @@ public class App {
         app = Javalin.create(config -> {
             config.router.apiBuilder(() -> {
                 path("/products", () -> {
-                    get("/addBook", BookController::addBook);
-                    get("/removeBook", BookController::removeBook);
+//                    get("/addBook", BookController::addBook);
+//                    get("/removeBook", BookController::removeBook);
+                    post("/addEntry", ReadingListController::createEntry);
                 });
             });
         });
