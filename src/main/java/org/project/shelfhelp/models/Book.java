@@ -1,5 +1,7 @@
 package org.project.shelfhelp.models;
 
+import java.util.List;
+
 public class Book {
     private String id;
     private String title;
@@ -8,6 +10,7 @@ public class Book {
     private float averageRating;
     private String bookSummary;
     private String bookCover;
+    private List<Review> reviews;
 
     public Book(String id , String title, String author, String year, float averageRating, String bookSummary, String bookCover) {
         this.id = id;
@@ -19,6 +22,22 @@ public class Book {
         this.bookCover = bookCover;
 
     }
+
+    public Book(String bookId, String title, String author, String year, float averageRating, String bookSummary, String bookCover, List<Review> reviews) {
+
+        this.id = bookId;
+        this.title = title;
+        this.author = author;
+        this.year = year;
+        this.averageRating = averageRating;
+        this.bookSummary = bookSummary;
+        this.bookCover = bookCover;
+        this.reviews = reviews;
+    }
+
+    public Book(String id) {
+    }
+
 
     public String getTitle() {
         return title;
@@ -78,6 +97,7 @@ public class Book {
                 ", averageRating=" + averageRating +
                 ", bookSummary='" + bookSummary + '\'' +
                 ", bookCover='" + bookCover + '\'' +
+                ", reviews=" + reviews +
                 '}';
     }
 

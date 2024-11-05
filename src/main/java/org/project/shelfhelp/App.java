@@ -1,8 +1,14 @@
 package org.project.shelfhelp;
 
 import io.javalin.Javalin;
+import io.javalin.http.staticfiles.Location;
+import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
 import org.project.shelfhelp.controllers.EntryController;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
+//import io.javalin.rendering.template.JavalinThymeleaf;
+import java.util.Map;
 
 import static io.javalin.apibuilder.ApiBuilder.*;
 
@@ -17,24 +23,38 @@ public class App {
 
     public App() {
 
-        app = Javalin.create(config -> {
-            config.router.apiBuilder(() -> {
-                path("/book", () -> {
-                    // http://localhost:8080/book/addBook/buc0AAAAMAAJ
-                    post("/addBook/{bookId}", BookController::addBook);
-                    get("/removeBook", BookController::removeBook);
+        app = Javalin.create(
+                config -> {
+                    config.staticFiles.add("/public", Location.CLASSPATH);
+
+                    var resolver = new ClassLoaderTemplateResolver();
+                    resolver.setPrefix("/templates/");
+                    resolver.setSuffix(".html");
+                    resolver.setTemplateMode("HTML");
+
+                    var engine = new TemplateEngine();
+                    engine.setTemplateResolver(resolver);
+
+                    config.fileRenderer(new JavalinThymeleaf(engine));
+                });
+
+        app
+                    // http://localhost:8080/book/addBook/PLlOCUIAh88C
+                .post("/book/addBook/{bookId}", BookController::addBook)
+                // http://localhost:8080/book/removeBook/PLlOCUIAh88C
+                .delete("/book/removeBook/{bookId}", BookController::removeBook)
                     // GET http://localhost:8080/book/id/2
-                    get("/id/{bookId}", BookController::getBookById);
+                .get("/book/id/{bookId}", BookController::getBookById)
                     // http://localhost:8080/book?title=The Great Gatsby
-                    get("/", BookController::getBookByTitle);
-                });
-                path("/entry", () -> {
-                    put("/setTag", EntryController::setTag);
-                    put("/markAsRead", EntryController::markAsRead);
-                    get("/getStats", EntryController::getStats);
-                });
-            });
-        });
+                .get("/", BookController::getBookByTitle)
+                .get("/index", ctx -> {
+                        ctx.render("index.html");
+
+                    })
+            .put("/setTag", EntryController::setTag)
+            .put("/markAsRead", EntryController::markAsRead)
+            .get("/getStats", EntryController::getStats);
+
 
 
 

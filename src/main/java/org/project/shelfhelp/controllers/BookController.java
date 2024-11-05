@@ -10,6 +10,7 @@ import org.project.shelfhelp.repositories.GBRepository;
 import java.sql.SQLException;
 
 public class BookController {
+
     public static void addBook(Context ctx) throws Exception {
         var bookId = ctx.pathParam("bookId");
         Book book = GBRepository.getABookbyId(bookId);
@@ -28,7 +29,16 @@ public class BookController {
         ctx.status(201).json(addedBook);
 
 }
-        public static void removeBook(Context ctx) {
+        public static void removeBook(Context ctx) throws SQLException {
+                var id =ctx.pathParam("bookId");
+                var deletedBook = BookRepository.deleteBook(id);
+
+                if (deletedBook != null) {
+                    System.out.println(deletedBook);
+                    ctx.status(204).json(deletedBook);
+                } else {
+                    throw new BadRequestResponse("Cannot find book with this Id");
+                }
 
     }
 
