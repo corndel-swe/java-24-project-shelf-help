@@ -34,7 +34,7 @@ public class GBRepository {
         String author = String.valueOf(volumeInfo.get("authors"));
         String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
         String summary = String.valueOf(volumeInfo.get("description"));
-        String bookCover = String.valueOf(imageLinks.get("thumbnail"));
+        String bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
         System.out.println("title: " + title);
