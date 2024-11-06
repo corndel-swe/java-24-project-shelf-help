@@ -24,9 +24,11 @@
                 <a th:href="@{/details/{id}(id=${book.id})}">
                     <img class="bookCover" th:src="@{${book.bookCover}}" alt="bookCover">
                     <h3 th:text="${book.title}">Book Title</h3>
-                <div>
-                    <p th:text="${book.averageRating}"></p>
+
+                <div class="bookDetails">
+                    <p th:unless="${book.averageRating < 0.0}"></p>
                     <span class="star">&#x2605;</span>
+
                     <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post">
 
                         <button class="custom-button" role="button">
