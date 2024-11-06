@@ -137,7 +137,6 @@ td{
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
-  margin: 0 auto;
   min-height: 3rem;
   padding: calc(.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
@@ -147,7 +146,8 @@ td{
   -webkit-user-select: none;
   touch-action: manipulation;
   vertical-align: baseline;
-  width: 30%;
+  width: 100%;
+  margin: 0 auto;
 }
 
 .button-5:hover,
@@ -164,6 +164,11 @@ td{
   background-color: #c85000;
   box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
   transform: translateY(0);
+}
+
+.formButton{
+margin: 0 auto;
+width:70%;
 }
 
 /* Style search bar*/

@@ -11,7 +11,6 @@
 
 <main>
     <br>
-    <div>
     <section th:each="book : ${b}" class="bookContainer">
         <div><img class="bookImg" th:src="${book.bookCover}" width="300" /></div>
         <div class="bookDescription">
@@ -38,11 +37,14 @@
                 </tr>
             </table>
         </div>
-        <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post">
-        <button class="button-5" role="button">Add to reading list</button>
-        </form>
-        <a th:href="@{/book/addBook/{id}(id=${book.id})}" method="post">whoop</a>
+
     </section>
+    <br>
+
+    <div th:each="book : ${b}" class="formButton">
+        <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post" class="formButton">
+            <button class="button-5" role="button">Add to reading list</button>
+        </form>
     </div>
 
 
