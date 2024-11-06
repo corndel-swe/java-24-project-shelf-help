@@ -135,3 +135,9 @@ justify-content:center;
 
 }
 
+/* Style bookCover bar*/
+
+.bookCover{
+width: 200px;
+border-radius: 8px;
+}
