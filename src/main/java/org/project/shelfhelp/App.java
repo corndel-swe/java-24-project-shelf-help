@@ -51,9 +51,9 @@ public class App {
                 .post("/setTag", EntryController::setTag)
                 .post("/markAsRead", EntryController::markAsRead)
                 .get("/getStats", EntryController::getStats)
-                .get("/login", UserController::renderLoginForm)
+                .get("/", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
-                .post("/", UserController::getUser)
+                .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser)
                 .get("/logout", UserController::logOut);
 
