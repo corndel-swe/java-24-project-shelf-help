@@ -78,5 +78,11 @@ public class BookController {
         ctx.status(200);
     }
 
+    public static void detailsRender(Context ctx) throws Exception {
+            var id = ctx.pathParam("bookId");
+            var book = GBRepository.getABookbyId(id);
+            ctx.render("bookDetails.html", Map.of("b",book));
+    }
+
 
 }// end of BookController

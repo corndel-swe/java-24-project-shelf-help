@@ -22,7 +22,7 @@ public class UserController {
             ctx.sessionAttribute("id", user.getId());
             ctx.sessionAttribute("username", user.getUsername());
             ctx.status(200);
-            ctx.redirect("/index/");
+            ctx.redirect("/readingList/");
         } else {
             ctx.status(401)
             .redirect("/login/");

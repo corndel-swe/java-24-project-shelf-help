@@ -23,12 +23,11 @@
         </thead>
         <tbody>
         <tr th:each="entry : ${entries}">
-
-            <td th:text="${entry}">Book Title</td>
-<!--            <td th:text="${entry.author}">Author Name</td>-->
-<!--            <td th:text="${entry.year}">Year</td>-->
-<!--            <td th:text="${entry.isRead ? 'Read' : 'Unread'}"></td>-->
-<!--            <td th:text="${entry.tag}">Tag</td>-->
+            <td th:text="${entry.getTitle()}">Book Title</td>
+            <td th:text="${entry.getAuthor()}">Author Name</td>
+            <td th:text="${entry.getYear()}">Year</td>
+            <td th:text="${entry.isRead() ? 'Read' : 'Unread'}"></td>
+            <td th:text="${entry.getTag()}">Tag</td>
         </tr>
         </tbody>
     </table>
