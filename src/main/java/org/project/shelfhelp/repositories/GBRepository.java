@@ -105,7 +105,7 @@ public class GBRepository {
             } else{
                 bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
-//            System.out.println("bookcover"+ bookCover);
+            System.out.println("bookcover"+ bookCover);
 
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
@@ -155,6 +155,7 @@ public class GBRepository {
             } else{
                 bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
+            System.out.println("bookcover"+ bookCover);
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
