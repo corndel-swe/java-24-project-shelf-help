@@ -60,14 +60,12 @@ public class App {
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
 
-                        ctx.render("index.html");
-                })
-            .put("/setTag", EntryController::setTag)
-            .put("/markAsRead", EntryController::markAsRead)
-            .get("/getStats", EntryController::getStats);
+                    ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
 
-                        ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
-                    })
+                })
+
+
+
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
                     var book = GBRepository.getABookbyId(id);
