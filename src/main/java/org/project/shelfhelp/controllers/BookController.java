@@ -29,7 +29,7 @@ public class BookController {
 //        int userId = ctx.sessionAttribute("id");
         // hardcoding userId as 1 until we fix it properly with sessionAttribute
         Entry entry = EntryRepository.createEntry(1, bookId);
-        ctx.status(201).json(addedBook);
+        ctx.status(201).redirect("/readingList");
 
 }
         public static void removeBook(Context ctx) throws SQLException {
