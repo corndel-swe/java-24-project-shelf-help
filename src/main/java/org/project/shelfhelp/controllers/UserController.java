@@ -46,7 +46,7 @@ public class UserController {
         if(response!=-1){
             System.out.println(response);
             ctx.status(201);
-            ctx.redirect("/index");
+            ctx.redirect("/");
         }else{
             ctx.status(400);
             throw new BadRequestResponse("unable to add user.");
