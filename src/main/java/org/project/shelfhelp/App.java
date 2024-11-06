@@ -53,7 +53,7 @@ public class App {
                 .get("/getStats", EntryController::getStats)
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
-                .post("/login", UserController::getUser)
+                .post("/", UserController::getUser)
                 .post("/register", UserController::addNewUser);
 
 
