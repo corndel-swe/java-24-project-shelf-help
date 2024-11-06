@@ -18,10 +18,15 @@
             </div>
         </form>
         </div>
+
         <div class="searchContainer">
             <div class="book" th:each="book : ${books}">
                 <h3 th:text="${book.title}">Book Title</h3>
                 <p th:text="${book.author}">Authors: </p>
+                <p th:text="${book.year}">Authors: </p>
+                <p th:text="${book.averageRating}">Authors: </p>
+<!--                <img th:src="@{${book.coverUrl}}" alt="bookCover">-->
+                <button>add</button>
             </div>
         </div>
 
