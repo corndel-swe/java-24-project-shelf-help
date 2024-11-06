@@ -58,7 +58,7 @@ public class App {
                         ctx.render("index.html",
                                 Map.of("username",
                                             ctx.sessionAttribute("username") != null ?
-                                                ctx.sessionAttribute("username") != null : ""));
+                                                ctx.sessionAttribute("id").toString()  : ""));
                     })
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
