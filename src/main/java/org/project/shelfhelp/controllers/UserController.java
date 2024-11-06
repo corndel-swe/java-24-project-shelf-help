@@ -56,7 +56,7 @@ public class UserController {
 
     public static void logOut(Context ctx) throws Exception {
         ctx.req().getSession().invalidate();
-        ctx.redirect("/login");
+        ctx.redirect("/");
     }
 
     public static void renderLoginForm(Context ctx) {
