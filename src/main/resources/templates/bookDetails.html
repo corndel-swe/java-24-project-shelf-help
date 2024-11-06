@@ -10,17 +10,37 @@
 </header>
 
 <main>
-    <section th:each="book : ${b}" class="container">
-        <div th:text="${book.id}"></div>
-        <div th:text="${book.title}"></div>
-        <img th:src="${book.bookCover}"/>
-        <div th:text="${book.author}"></div>
-        <div th:text="${book.year}"></div>
-        <div th:text="${book.averageRating}"></div>
-        <div th:text="${book.bookSummary}"></div>
-
-
+    <br>
+    <section th:each="book : ${b}" class="bookContainer">
+        <div><img class="bookImg" th:src="${book.bookCover}" width="300" /></div>
+        <div class="bookDescription">
+            <table>
+                <tr>
+                    <td class="tableHeader">Title:</td>
+                    <td th:text="${book.title}"></td>
+                </tr>
+                <tr>
+                    <td class="tableHeader">Author:</td>
+                    <td th:text="${book.author}"></td>
+                </tr>
+                <tr>
+                    <td class="tableHeader">Release year:</td>
+                    <td th:text="${book.year}"></td>
+                </tr>
+                <tr>
+                    <td class="tableHeader">Rating:</td>
+                    <td th:text="${book.averageRating}+' stars'"></td>
+                </tr>
+                <tr>
+                    <td class="tableHeader">Summary:</td>
+                    <td th:text="${book.bookSummary}"></td>
+                </tr>
+            </table>
+        </div>
     </section>
+
+    <button class="button-5" role="button">Button 5</button>
+
 </main>
 
 <footer th:replace = "fragments :: footer"></footer>
