@@ -49,8 +49,8 @@ public class App {
                 .get("/book", BookController::getBookByTitle) // http://localhost:8080/book?title=The Great Gatsby
                 .get("/details/{bookId}", BookController::detailsRender)
                 .get("/readingList", EntryController::readingListRender)
-                .put("/setTag", EntryController::setTag)
-                .put("/markAsRead", EntryController::markAsRead)
+                .post("/setTag", EntryController::setTag)
+                .post("/markAsRead", EntryController::markAsRead)
                 .get("/getStats", EntryController::getStats)
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)

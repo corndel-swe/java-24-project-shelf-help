@@ -26,9 +26,9 @@ public class BookController {
                 book.getBookSummary(),
                 book.getBookCover()
         );
-//        int userId = ctx.sessionAttribute("id");
-        // hardcoding userId as 1 until we fix it properly with sessionAttribute
-        Entry entry = EntryRepository.createEntry(1, bookId);
+        var userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
+        var username = ctx.sessionAttribute("username") != null ? ctx.sessionAttribute("username") : "";
+        Entry entry = EntryRepository.createEntry(userId, bookId);
         ctx.status(201).json(addedBook);
 
 }
