@@ -21,12 +21,14 @@
 
         <div class="searchContainer">
             <div class="book" th:each="book : ${books}">
+                <img class="bookCover" th:src="@{${book.bookCover}}" alt="bookCover">
                 <h3 th:text="${book.title}">Book Title</h3>
-                <p th:text="${book.author}">Authors: </p>
-                <p th:text="${book.year}">Authors: </p>
-                <p th:text="${book.averageRating}">Authors: </p>
-<!--                <img th:src="@{${book.coverUrl}}" alt="bookCover">-->
+                <div>
+                <p th:text="${book.averageRating}">
+                </p>
+                <span class="star">&#x2605;</span>
                 <button>add</button>
+                </div>
             </div>
         </div>
 

@@ -29,7 +29,6 @@ public class App {
         app = Javalin.create(
                 config -> {
                     config.staticFiles.add("/public", Location.CLASSPATH);
-
                     var resolver = new ClassLoaderTemplateResolver();
                     resolver.setPrefix("/templates/");
                     resolver.setSuffix(".html");
