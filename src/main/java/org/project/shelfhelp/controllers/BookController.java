@@ -29,7 +29,7 @@ public class BookController {
         var userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
         var username = ctx.sessionAttribute("username") != null ? ctx.sessionAttribute("username") : "";
         Entry entry = EntryRepository.createEntry(userId, bookId);
-        ctx.status(201).json(addedBook);
+        ctx.redirect("/readingList");
 
 }
         public static void removeBook(Context ctx) throws SQLException {

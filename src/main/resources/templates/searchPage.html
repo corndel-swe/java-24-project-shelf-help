@@ -21,15 +21,26 @@
 
         <div class="searchContainer">
             <div class="book" th:each="book : ${books}">
-                <img class="bookCover" th:src="@{${book.bookCover}}" alt="bookCover">
-                <h3 th:text="${book.title}">Book Title</h3>
+                <a th:href="@{/details/{id}(id=${book.id})}">
+                    <img class="bookCover" th:src="@{${book.bookCover}}" alt="bookCover">
+                    <h3 th:text="${book.title}">Book Title</h3>
                 <div>
-                <p th:text="${book.averageRating}">
-                </p>
-                <span class="star">&#x2605;</span>
-                <button>add</button>
+                    <p th:text="${book.averageRating}"></p>
+                    <span class="star">&#x2605;</span>
+                    <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post">
+                        <button class="Btn"  role="button">
+
+                            <div class="sign">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 80c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 144L48 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l144 0 0 144c0 17.7 14.3 32 32 32s32-14.3 32-32l0-144 144 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l-144 0 0-144z"/></svg>                            </div>
+
+                            <div class="text">Added!</div>
+                        </button>
+<!--                        <button class="addBtn" role="button">Add</button>-->
+                    </form>
                 </div>
+                </a>
             </div>
+
         </div>
 
     </div>
