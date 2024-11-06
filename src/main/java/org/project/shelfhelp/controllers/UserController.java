@@ -5,6 +5,7 @@ import org.project.shelfhelp.models.UserDTO;
 import org.project.shelfhelp.repositories.UserRepository;
 
 import java.sql.SQLException;
+import java.util.Map;
 import java.util.Objects;
 
 public class UserController {
@@ -32,7 +33,6 @@ public class UserController {
     }
 
     public static void addNewUser(Context ctx) throws Exception {
-
         // if using a form - grab each parameter to pass into User constructor
         String username = ctx.formParamAsClass("username", String.class).get();
         String firstName = ctx.formParamAsClass("firstName", String.class).get();
@@ -46,10 +46,11 @@ public class UserController {
         if(response!=-1){
             System.out.println(response);
             ctx.status(201);
-            ctx.redirect("/");
+            ctx.redirect("/readingList");
         }else{
             ctx.status(400);
-            throw new BadRequestResponse("unable to add user.");
+            ctx.redirect("/register");
+            //throw new BadRequestResponse("unable to add user.");
         }
     }
 

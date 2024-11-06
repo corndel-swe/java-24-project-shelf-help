@@ -26,8 +26,12 @@
     </p>
     <p>
     <label for="password">password</label>
-    <input type="password" name="password" id="password" />
+        <input type="password" name="password" pattern="(?=.*\d)(?=.*[\W_]).{8,}"
+               title="8 characters, at least one special character and one number"
+               id="password"></p>
     </p>
+
+
 
     <button type="submit">register</button>
 </form>
