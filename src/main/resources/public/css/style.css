@@ -80,6 +80,7 @@ nav{
 .topnav a.active {
   border-bottom: 3px solid red;
 }
+
 /* Style search bar*/
 .InputContainer {
   margin: 30px;
@@ -133,3 +134,4 @@ display:flex;
 justify-content:center;
 
 }
+

@@ -1,10 +1,13 @@
 package org.project.shelfhelp.repositories;
 
 import org.project.shelfhelp.DB;
+import org.project.shelfhelp.models.Book;
 import org.project.shelfhelp.models.Entry;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class EntryRepository {
@@ -33,6 +36,34 @@ public class EntryRepository {
         }
 
         return null;
+    }
+
+    public static List<Entry> findByUser(int userId) throws SQLException {
+        var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id WHERE user_id = ?";
+
+        try (var con = DB.getConnection();
+             var stmt = con.prepareStatement(query);) {
+
+            stmt.setInt(1, userId);
+
+            try (var rs = stmt.executeQuery();) {
+                List<Entry> entries = new ArrayList<>();
+
+                while (rs.next()) {
+                    var bookId = rs.getString("id");
+                    var bookTitle = rs.getString("title");
+                    var author = rs.getString("author");
+                    var year = rs.getString("release_year");
+                    var bookCover = rs.getString("cover_url");
+                    var isRead = rs.getInt("is_read") != 0;
+                    var tag = rs.getString("tag") != null ? rs.getString("tag") : null;
+
+                    entries.add(new Entry(bookId, bookTitle, author, year, bookCover, isRead, tag));
+                }
+
+                return entries;
+            }
+        }
     }
 
     public static void setTag(int userId, String bookId, String tag) {

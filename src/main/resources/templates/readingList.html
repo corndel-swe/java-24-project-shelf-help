@@ -1,11 +1,40 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Title</title>
+    <title>User Reading List</title>
 </head>
 <body>
+<header th:replace="fragments :: header"></header>
+
+<main>
+    <h1>Reading List</h1>
+    <table>
+        <thead>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Year</th>
+            <th>Status</th>
+            <th>Tag</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="entry : ${entries}">
+
+            <td th:text="${entry}">Book Title</td>
+<!--            <td th:text="${entry.author}">Author Name</td>-->
+<!--            <td th:text="${entry.year}">Year</td>-->
+<!--            <td th:text="${entry.isRead ? 'Read' : 'Unread'}"></td>-->
+<!--            <td th:text="${entry.tag}">Tag</td>-->
+        </tr>
+        </tbody>
+    </table>
+</main>
+
+<footer th:replace="fragments :: footer"></footer>
 
 </body>
 </html>
