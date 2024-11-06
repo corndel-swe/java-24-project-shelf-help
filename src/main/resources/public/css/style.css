@@ -232,7 +232,7 @@ width: 200px;
 border-radius: 8px;
 }
 
-form {
+.loginForm {
       margin:auto;
       background-color: #fff;
       border: 1px solid black;
