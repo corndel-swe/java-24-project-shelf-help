@@ -50,7 +50,7 @@ public class EntryRepository {
                 List<Entry> entries = new ArrayList<>();
 
                 while (rs.next()) {
-                    var bookId = rs.getString("id");
+                    var bookId = rs.getString("book_id");
                     var bookTitle = rs.getString("title");
                     var author = rs.getString("author");
                     var year = rs.getString("release_year");

@@ -26,10 +26,10 @@ public class BookController {
                 book.getBookSummary(),
                 book.getBookCover()
         );
-//        int userId = ctx.sessionAttribute("id");
-        // hardcoding userId as 1 until we fix it properly with sessionAttribute
-        Entry entry = EntryRepository.createEntry(1, bookId);
-        ctx.status(201).redirect("/readingList");
+        var userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
+        var username = ctx.sessionAttribute("username") != null ? ctx.sessionAttribute("username") : "";
+        Entry entry = EntryRepository.createEntry(userId, bookId);
+        ctx.status(201).json(addedBook);
 
 }
         public static void removeBook(Context ctx) throws SQLException {
@@ -76,6 +76,12 @@ public class BookController {
 //        List<Book> booksByAuthor = GBRepository.getBooksByTitle(author);
         ctx.render("/searchPage.html", Map.of("books", booksByTitle));
         ctx.status(200);
+    }
+
+    public static void detailsRender(Context ctx) throws Exception {
+            var id = ctx.pathParam("bookId");
+            var book = GBRepository.getABookbyId(id);
+            ctx.render("bookDetails.html", Map.of("b",book));
     }
 
 
