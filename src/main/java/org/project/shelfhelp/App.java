@@ -54,7 +54,9 @@ public class App {
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
                 .post("/", UserController::getUser)
-                .post("/register", UserController::addNewUser);
+                .post("/register", UserController::addNewUser)
+                .get("/logout", UserController::logOut);
+
 
 
 

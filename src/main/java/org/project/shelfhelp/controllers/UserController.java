@@ -53,6 +53,11 @@ public class UserController {
         }
     }
 
+    public static void logOut(Context ctx) throws Exception {
+        ctx.req().getSession().invalidate();
+        ctx.redirect("/login");
+    }
+
     public static void renderLoginForm(Context ctx) {
         ctx.render("/login.html");
     }
@@ -60,4 +65,5 @@ public class UserController {
     public static void renderRegisterForm(Context ctx) {
         ctx.render("/register.html");
     }
+
 }
