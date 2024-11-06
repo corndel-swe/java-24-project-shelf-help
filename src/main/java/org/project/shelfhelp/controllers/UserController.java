@@ -25,7 +25,7 @@ public class UserController {
             ctx.redirect("/readingList/");
         } else {
             ctx.status(401)
-            .redirect("/login/");
+            .redirect("/");
 
         }
 
