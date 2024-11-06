@@ -235,7 +235,7 @@ border-radius: 8px;
 height:300px;
 }
 
-form {
+.loginForm {
       margin:auto;
       background-color: #fff;
       border: 1px solid black;
