@@ -14,6 +14,7 @@
     <table>
         <thead>
         <tr>
+            <th>Book ID</th>
             <th>Title</th>
             <th>Author</th>
             <th>Year</th>
@@ -23,14 +24,30 @@
         </thead>
         <tbody>
         <tr th:each="entry : ${entries}">
+            <td th:text="${entry.getBookId()}">Book ID</td>
+            <td th:text="${entry.getTitle()}">Book Title</td>
+            <td th:text="${entry.getAuthor()}">Author Name</td>
+            <td th:text="${entry.getYear()}">Year</td>
+            <td th:text="${entry.isRead() ? 'Read' : 'Unread'}"></td>
+            <td th:text="${entry.getTag()}">Tag</td>
 
-            <td th:text="${entry}">Book Title</td>
-<!--            <td th:text="${entry.author}">Author Name</td>-->
-<!--            <td th:text="${entry.year}">Year</td>-->
-<!--            <td th:text="${entry.isRead ? 'Read' : 'Unread'}"></td>-->
-<!--            <td th:text="${entry.tag}">Tag</td>-->
+            <td>
+                <form th:action="@{/setTag}" method="post">
+                    <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
+                    <input type="text" name="tag" placeholder="Enter tag" required/>
+                    <button type="submit">Set Tag</button>
+                </form>
+            </td>
+
+            <td>
+                <form th:action="@{/markAsRead}" method="post">
+                    <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
+                    <button type="submit" th:disabled="${entry.isRead()}">Mark as Read</button>
+                </form>
+            </td>
         </tr>
         </tbody>
+
     </table>
 </main>
 

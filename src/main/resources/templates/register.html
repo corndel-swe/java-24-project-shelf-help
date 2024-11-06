@@ -10,20 +10,24 @@
 <header th:replace = "fragments :: header"></header>
 
 <form action="/register" method="POST">
-    <label for="username">username</label>
+    <p>
+    <label for="username">username </label>
     <input type="text" name="username" id="username" />
-    <p></p>
-    <label for="firstName">First Name</label>
+    </p>
+    <label for="firstName">first Name</label>
     <input type="text" name="firstName" id="firstName" />
-    <p></p>
-    <label for="lastName">Last Name</label>
+    <p>
+    <label for="lastName">last Name</label>
     <input type="text" name="lastName" id="lastName" />
-    <p></p>
-    <label for="avatarUrl">Avatar URL</label>
+    </p>
+    <p>
+    <label for="avatarUrl">avatar</label>
     <input type="url" name="avatarUrl" id="avatarUrl" />
-    <p></p>
+    </p>
+    <p>
     <label for="password">password</label>
     <input type="password" name="password" id="password" />
+    </p>
 
     <button type="submit">register</button>
 </form>

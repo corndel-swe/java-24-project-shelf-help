@@ -41,43 +41,15 @@ public class App {
                 });
 
         app
-                    // http://localhost:8080/book/addBook/PLlOCUIAh88C
-                .post("/book/addBook/{bookId}", BookController::addBook
-                )
-                // http://localhost:8080/books/search?title=The Great Gatsby
-
-
-                //http://localhost:8080/books/search
-                .get("/books/search", BookController::SearchRender)
-
-                // http://localhost:8080/book/removeBook/PLlOCUIAh88C
-                .delete("/book/removeBook/{bookId}", BookController::removeBook)
-                    // GET http://localhost:8080/book/id/2
-                .get("/book/id/{bookId}", BookController::getBookById)
-
-                // http://localhost:8080/book?title=The Great Gatsby
-                .get("/book", BookController::getBookByTitle)
-                .get("/index", ctx -> {
-
-                    ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
-
-                })
-
-
-
-                .get("/details/{bookId}", ctx -> {
-                    var id = ctx.pathParam("bookId");
-                    var book = GBRepository.getABookbyId(id);
-                    ctx.render("bookDetails.html", Map.of("b",book));
-                })
-                .get("/readingList", ctx -> {
-                    var id = 1;
-                    var entries = EntryRepository.findByUser(id);
-                    ctx.render("readingList.html", Map.of("entries", entries));
-
-                })
-                .put("/setTag", EntryController::setTag)
-                .put("/markAsRead", EntryController::markAsRead)
+                .post("/book/addBook/{bookId}", BookController::addBook) // http://localhost:8080/book/addBook/PLlOCUIAh88C
+                .get("/books/search", BookController::SearchRender) // http://localhost:8080/books/search?title=The Great Gatsby
+                .delete("/book/removeBook/{bookId}", BookController::removeBook) // http://localhost:8080/book/removeBook/PLlOCUIAh88C
+                .get("/book/id/{bookId}", BookController::getBookById) // GET http://localhost:8080/book/id/
+                .get("/book", BookController::getBookByTitle) // http://localhost:8080/book?title=The Great Gatsby
+                .get("/details/{bookId}", BookController::detailsRender)
+                .get("/readingList", EntryController::readingListRender)
+                .post("/setTag", EntryController::setTag)
+                .post("/markAsRead", EntryController::markAsRead)
                 .get("/getStats", EntryController::getStats)
                 .get("/login", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
