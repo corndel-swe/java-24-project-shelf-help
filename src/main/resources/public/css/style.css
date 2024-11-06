@@ -219,7 +219,16 @@ width:70%;
     transition: transform 0.2s;
 }
 .book h3{
-
+  overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+           line-clamp: 1;
+   -webkit-box-orient: vertical;
+}
+.bookDetails{
+display: flex;
+    flex-direction: row;
+    justify-content: space-between;
 }
 .searchForm{
 display:flex;
