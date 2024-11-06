@@ -46,7 +46,7 @@ public class UserController {
         if(response!=-1){
             System.out.println(response);
             ctx.status(201);
-            ctx.redirect("/readingList");
+            ctx.redirect("/");
         }else{
             ctx.status(400);
             ctx.redirect("/register");
