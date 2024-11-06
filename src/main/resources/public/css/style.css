@@ -1,7 +1,5 @@
 body{
     font-family: Arial, Helvetica, sans-serif;
-    width: 100vw;
-    height: 100vh;
     display: grid;
     grid-template-rows: auto 2fr;
     color: #555555;
@@ -79,6 +77,98 @@ nav{
 
 .topnav a.active {
   border-bottom: 3px solid red;
+}
+
+.bookContainer{
+    display: grid;
+    grid-template-rows: 1fr;
+    grid-template-columns: 1fr auto;
+    width: 75%;
+    margin: 0 auto;
+    gap: 5px;
+    padding: 10px;
+    background-color: #d1e0e0;
+    border-radius: 25px;
+}
+
+.bookDescription{
+    display:flex;
+    justify-content: center;
+    flex-direction: column;
+    padding: 0 50px 0 50px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #fff;
+
+
+}
+
+.bookImg{
+    border-top-left-radius: 25px;
+    border-bottom-left-radius: 25px;
+}
+
+.tableHeader{
+    font-weight: bold;
+    width:120px;
+}
+
+td{
+    vertical-align:top;
+    height:auto;
+}
+
+
+
+/* Buttons */
+.button-5 {
+  align-items: center;
+  background-clip: padding-box;
+  background-color: #fa6400;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  box-shadow: rgba(0, 0, 0, 0.02) 0 1px 3px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-flex;
+  font-family: system-ui,-apple-system,system-ui,"Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-size: 16px;
+  font-weight: 600;
+  justify-content: center;
+  line-height: 1.25;
+  min-height: 3rem;
+  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
+  position: relative;
+  text-decoration: none;
+  transition: all 250ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: baseline;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.button-5:hover,
+.button-5:focus {
+  background-color: #fb8332;
+  box-shadow: rgba(0, 0, 0, 0.1) 0 4px 12px;
+}
+
+.button-5:hover {
+  transform: translateY(-1px);
+}
+
+.button-5:active {
+  background-color: #c85000;
+  box-shadow: rgba(0, 0, 0, .06) 0 2px 4px;
+  transform: translateY(0);
+}
+
+.formButton{
+margin: 0 auto;
+width:70%;
 }
 
 /* Style search bar*/
