@@ -41,6 +41,11 @@ public class UserRepository {
     }
 
     public static int insertNewUser(UserDTO newUser) throws SQLException {
+
+        // check if user exists in system
+        if(findUser(newUser.username()) != null){
+            return -1;
+        }
         String query = "INSERT INTO users \n";
         query += "(first_name, last_name, username, password, avatar_url) \n";
         query += ("VALUES (?, ?, ?, ?, ?); \n");
