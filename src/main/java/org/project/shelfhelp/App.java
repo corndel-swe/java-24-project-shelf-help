@@ -4,6 +4,7 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
+import org.project.shelfhelp.repositories.EntryRepository;
 import org.project.shelfhelp.repositories.GBRepository;
 import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
@@ -45,6 +46,9 @@ public class App {
                 .post("/book/addBook/{bookId}", BookController::addBook
                 )
                 // http://localhost:8080/books/search?title=The Great Gatsby
+
+
+                //http://localhost:8080/books/search
                 .get("/books/search", BookController::SearchRender)
 
                 // http://localhost:8080/book/removeBook/PLlOCUIAh88C
@@ -52,18 +56,26 @@ public class App {
                     // GET http://localhost:8080/book/id/2
                 .get("/book/id/{bookId}", BookController::getBookById)
 
-                    // http://localhost:8080/book?title=The Great Gatsby
+                // http://localhost:8080/book?title=The Great Gatsby
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
-                        ctx.render("index.html",
-                                Map.of("username",
-                                            ctx.sessionAttribute("username") != null ?
-                                                ctx.sessionAttribute("id").toString()  : ""));
-                    })
+
+                    ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
+
+                })
+
+
+
                 .get("/details/{bookId}", ctx -> {
                     var id = ctx.pathParam("bookId");
                     var book = GBRepository.getABookbyId(id);
                     ctx.render("bookDetails.html", Map.of("b",book));
+                })
+                .get("/readingList", ctx -> {
+                    var id = 1;
+                    var entries = EntryRepository.findByUser(id);
+                    ctx.render("readingList.html", Map.of("entries", entries));
+
                 })
                 .put("/setTag", EntryController::setTag)
                 .put("/markAsRead", EntryController::markAsRead)
@@ -72,6 +84,7 @@ public class App {
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser);
+
 
 
 
