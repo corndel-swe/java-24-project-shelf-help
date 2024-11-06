@@ -46,6 +46,9 @@ public class App {
                 .post("/book/addBook/{bookId}", BookController::addBook
                 )
                 // http://localhost:8080/books/search?title=The Great Gatsby
+
+
+                //http://localhost:8080/books/search
                 .get("/books/search", BookController::SearchRender)
 
                 // http://localhost:8080/book/removeBook/PLlOCUIAh88C
@@ -53,9 +56,16 @@ public class App {
                     // GET http://localhost:8080/book/id/2
                 .get("/book/id/{bookId}", BookController::getBookById)
 
-                    // http://localhost:8080/book?title=The Great Gatsby
+                // http://localhost:8080/book?title=The Great Gatsby
                 .get("/book", BookController::getBookByTitle)
                 .get("/index", ctx -> {
+
+                        ctx.render("index.html");
+                })
+            .put("/setTag", EntryController::setTag)
+            .put("/markAsRead", EntryController::markAsRead)
+            .get("/getStats", EntryController::getStats);
+
                         ctx.render("index.html", Map.of("username", ctx.sessionAttribute("username")));
                     })
                 .get("/details/{bookId}", ctx -> {
@@ -76,6 +86,7 @@ public class App {
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser);
+
 
 
 
