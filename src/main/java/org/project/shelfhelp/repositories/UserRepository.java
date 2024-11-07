@@ -6,6 +6,8 @@ import io.javalin.http.Context;
 import org.project.shelfhelp.models.User;
 import org.project.shelfhelp.models.UserDTO;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.regex.Matcher;
@@ -93,5 +95,15 @@ public class UserRepository {
         } else {
             return "";
         }
+    }
+
+    public static String hashPassword(String plainPassword, String username) throws NoSuchAlgorithmException {
+
+        MessageDigest messageDigest = MessageDigest.getInstance("SHA-256");
+        String saltedPassword = username + "shelfHelp" + plainPassword;
+        messageDigest.update(saltedPassword.getBytes());
+        String hashedPassword = new String(messageDigest.digest());
+
+        return hashedPassword;
     }
 }

@@ -4,13 +4,14 @@ import org.project.shelfhelp.models.User;
 import org.project.shelfhelp.models.UserDTO;
 import org.project.shelfhelp.repositories.UserRepository;
 
+import java.security.MessageDigest;
 import java.sql.SQLException;
-import java.util.Map;
-import java.util.Objects;
+import java.security.MessageDigest;
+
 
 public class UserController {
 
-    public static void getUser(Context ctx) throws SQLException {
+    public static void getUser(Context ctx) throws Exception {
 
         // get the username
         String username = ctx.formParamAsClass("username", String.class).get();
@@ -19,7 +20,8 @@ public class UserController {
         // check the username exists in database
         User user = UserRepository.findUser(username);
         // redirect
-        if(user != null && user.getPassword().equals(password)){
+        if(user != null &&
+                user.getPassword().equals(UserRepository.hashPassword(password, username))){
             ctx.sessionAttribute("id", user.getId());
             ctx.sessionAttribute("username", user.getUsername());
             ctx.status(200);
@@ -37,14 +39,16 @@ public class UserController {
         String username = ctx.formParamAsClass("username", String.class).get();
         String firstName = ctx.formParamAsClass("firstName", String.class).get();
         String lastName = ctx.formParamAsClass("lastName", String.class).get();
-        String password = ctx.formParamAsClass("password", String.class).get();
+        String plainPassword = ctx.formParamAsClass("password", String.class).get();
         String avatarUrl = ctx.formParamAsClass("avatarUrl", String.class).get();
 
-        System.out.println("before: " + avatarUrl);
+        // ensure avatarUrl is .png or .jpg
         avatarUrl = UserRepository.validateAvatarUrl(avatarUrl);
-        System.out.println("after: " + avatarUrl);
 
-        UserDTO body = new UserDTO(avatarUrl, password, username, lastName, firstName);
+        // hash the password
+        String hashedPassword = UserRepository.hashPassword(plainPassword, username);
+
+        UserDTO body = new UserDTO(avatarUrl, hashedPassword, username, lastName, firstName);
 
         int response = UserRepository.insertNewUser(body);
         if(response!=-1){
