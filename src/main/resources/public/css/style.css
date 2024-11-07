@@ -116,7 +116,7 @@ nav{
                line-clamp: 1;
        -webkit-box-orient: vertical;
     max-height:500px;
-    min-height:300px;
+    min-height:200px;
     padding: 0 50px 0 50px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
