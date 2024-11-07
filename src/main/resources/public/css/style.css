@@ -327,3 +327,9 @@ width:70%;
 
 
 
+.profile-header{
+display:flex;
+justify-content: space-between;
+    flex-wrap: nowrap;
+    gap: 100px;
+}

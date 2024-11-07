@@ -22,7 +22,7 @@
             <th>Tag</th>
             <th>Set tag</th>
             <th>Mark as Read</th>
-
+            <th>Delete</th> <!-- New column header for Delete -->
         </tr>
         </thead>
         <tbody>
@@ -43,11 +43,18 @@
                     <button type="submit" class="button-5" style="max-width: 80px;">Set Tag</button>
                 </form>
             </td>
-            
+
             <td>
                 <form th:action="@{/markAsRead}" method="post">
                     <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
                     <button type="submit" th:disabled="${entry.isRead()}" style="height:70px">Mark as Read</button>
+                </form>
+            </td>
+
+            <td>
+                <form th:action="@{/deleteEntry}" method="post" onsubmit="return confirm('Are you sure you want to delete this entry?');">
+                    <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
+                    <button type="submit" class="button-5" style="height:70px; background-color: green; color: white;">Delete</button>
                 </form>
             </td>
         </tr>

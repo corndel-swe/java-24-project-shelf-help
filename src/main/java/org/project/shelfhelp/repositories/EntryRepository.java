@@ -49,6 +49,26 @@ public class EntryRepository {
         return null;
     }
 
+    public static void deleteEntry(int userId, String bookId) {
+        String deleteQuery = "DELETE FROM reading_lists WHERE user_id = ? AND book_id = ?";
+
+        try (var conn = DB.getConnection();
+             var statement = conn.prepareStatement(deleteQuery)) {
+
+            statement.setInt(1, userId);
+            statement.setString(2, bookId);
+
+            int rowsUpdated = statement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Entry deleted for user ID: " + userId + ", book ID: " + bookId);
+            } else {
+                System.out.println("No entry found for user ID: " + userId + ", book ID: " + bookId + ". Delete failed.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Failed to delete entry for user ID: " + userId + ", book ID: " + bookId + ". Error: " + e.getMessage());
+        }
+    }
 
     public static List<Entry> findByUser(int userId) throws SQLException {
         var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id WHERE user_id = ?";
@@ -57,6 +77,33 @@ public class EntryRepository {
              var stmt = con.prepareStatement(query);) {
 
             stmt.setInt(1, userId);
+
+            try (var rs = stmt.executeQuery();) {
+                List<Entry> entries = new ArrayList<>();
+
+                while (rs.next()) {
+                    var bookId = rs.getString("book_id");
+                    var bookTitle = rs.getString("title");
+                    var author = rs.getString("author");
+                    var year = rs.getString("release_year");
+                    var bookCover = rs.getString("cover_url");
+                    var isRead = rs.getInt("is_read") != 0;
+                    var tag = rs.getString("tag") != null ? rs.getString("tag") : null;
+
+                    entries.add(new Entry(bookId, bookTitle, author, year, bookCover, isRead, tag));
+                }
+
+                return entries;
+            }
+        }
+    }
+
+    public static List<Entry> findAll() throws SQLException {
+        var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id";
+
+        try (var con = DB.getConnection();
+             var stmt = con.prepareStatement(query);) {
+
 
             try (var rs = stmt.executeQuery();) {
                 List<Entry> entries = new ArrayList<>();
