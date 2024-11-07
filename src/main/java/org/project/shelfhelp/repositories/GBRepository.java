@@ -99,7 +99,7 @@ public class GBRepository {
             } else{
                 bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
-            System.out.println("bookcover"+ bookCover);
+            System.out.println("bookcover: "+ bookCover);
 
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
 
@@ -145,7 +145,7 @@ public class GBRepository {
             {
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
             }
-            System.out.println("bookcover"+ bookCover);
+            System.out.println("bookcover: "+ bookCover);
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
         }
@@ -163,14 +163,14 @@ public class GBRepository {
 
 
     //// HERE FOR DEBUGGING
-//public static void main(String[] args) throws Exception {
-//    GBRepository.getABookbyId("Cta5AAAAIAAJ");
-//    System.out.println("-------");
-//
-//    GBRepository.getBooksByTitle("twilight");
-//    System.out.println("-------");
-//    GBRepository.getBooksByAuthor("meyers");
-//}
+public static void main(String[] args) throws Exception {
+    GBRepository.getABookbyId("lGjFtMRqp_YC");
+    System.out.println("-------");
+
+    GBRepository.getBooksByTitle("twilight");
+    System.out.println("-------");
+    GBRepository.getBooksByAuthor("meyers");
+}
 
 
 }
