@@ -52,6 +52,13 @@ nav{
     align-items: center;
     border-bottom: 3px gray;
     }
+/* logo*/
+.logo{
+ display: block;
+  margin: auto;
+  width: 48%;
+  height:60%
+    }
 
 /* Add a grey background color to the top navigation */
 .topnav {
@@ -171,78 +178,13 @@ margin: 0 auto;
 width:70%;
 }
 
-/* Style search bar*/
-.InputContainer {
-  margin: 30px;
-  width: 300px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(to bottom,rgb(227, 213, 255),rgb(255, 231, 231));
-  border-radius: 30px;
-  overflow: hidden;
-  cursor: pointer;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.075);
-}
 
-.input {
-  width: 250px;
-  height: 40px;
-  border: none;
-  outline: none;
-  caret-color: rgb(255, 81, 0);
-  background-color: rgb(255, 255, 255);
-  border-radius: 30px;
-  padding-left: 15px;
-  letter-spacing: 0.8px;
-  color: rgb(19, 19, 19);
-  font-size: 13.4px;
-  text-align:center;
-}
-.searchContainer {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
-}
 
-.book {
-    background-color: #fff;
 
-    border-radius: 8px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    margin: 10px;
-    padding: 15px;
-    width: 200px;
-    text-align: center;
-    transition: transform 0.2s;
-}
-.book h3{
-  overflow: hidden;
-   display: -webkit-box;
-   -webkit-line-clamp: 1; /* number of lines to show */
-           line-clamp: 1;
-   -webkit-box-orient: vertical;
-}
-.bookDetails{
-display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.searchForm{
-display:flex;
-justify-content:center;
 
-}
 
 /* Style bookCover bar*/
 
-.bookCover{
-width: 200px;
-border-radius: 8px;
-height:300px;
-}
 
 .loginForm {
       margin:auto;
@@ -253,60 +195,7 @@ height:300px;
       padding: 15px;
 }
 
-a{
-text-decoration:none;
-color:grey;
-}
 
-.custom-button {
-  font-size: 20px;
-  background: #F4ACB7;
-  padding: 0.6em 1em;
-  padding-left: 0.9em;
-  display: flex;
-  align-items: center;
-  border: none;
-  border-radius: 16px;
-  overflow: hidden;
-  transition: all 0.2s;
-  cursor: pointer;
-  text-decoration: none;
-}
 
-.custom-button span {
-  display: block;
-  margin-left: 0.3em;
-  transition: all 0.3s ease-in-out;
-}
 
-.custom-button svg {
-  display: block;
-  transform-origin: center center;
-  transition: transform 0.3s ease-in-out;
-}
-
-.custom-button:hover .svg-wrapper {
-  animation: fly-1 0.6s ease-in-out infinite alternate;
-}
-
-.custom-button:hover svg {
-  transform: translateX(1.2em) rotate(180deg) scale(1.1);
-}
-
-.custom-button:hover span {
-  transform: translateX(5em);
-}
-
-.custom-button:active {
-  transform: scale(0.95);
-}
-
-@keyframes fly-1 {
-  from {
-    transform: translateY(0.1em);
-  }
-  to {
-    transform: translateY(-0.1em);
-  }
-}
 

@@ -39,13 +39,12 @@ public class GBRepository {
         String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
         String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
-        String bookCover;
-        if(String.valueOf(imageLinks.get("large")) != "null"){
+        String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
+        if (imageLinks != null && imageLinks.get("large") != null){
             bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-        } else if (String.valueOf(imageLinks.get("large")) == "null") {
+        } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
+        {
             bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
-        } else{
-            bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
         }
         System.out.println("title: " + title);
         System.out.println("author: " + author);
@@ -89,14 +88,15 @@ public class GBRepository {
             String author = String.join(", ", authorList);
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
             String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
-            String bookCover;
-            if(String.valueOf(imageLinks.get("large")) != "null"){
+
+            String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
+            if (imageLinks != null && imageLinks.get("large") != null){
                 bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-            } else if (String.valueOf(imageLinks.get("large")) == "null") {
+            } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
+            {
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
-            } else{
-                bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
+
             System.out.println("bookcover"+ bookCover);
 
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
@@ -137,13 +137,12 @@ public class GBRepository {
             String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
             String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
-            String bookCover;
-            if(String.valueOf(imageLinks.get("large")) != "null"){
+            String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
+            if (imageLinks != null && imageLinks.get("large") != null){
                 bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-            } else if (String.valueOf(imageLinks.get("large")) == "null") {
+            } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
+            {
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
-            } else{
-                bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
             System.out.println("bookcover"+ bookCover);
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
