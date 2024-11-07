@@ -42,10 +42,8 @@ public class GBRepository {
         String summary = volumeInfo.get("description") != null ? String.valueOf(volumeInfo.get("description")).replaceAll("\"", "").replaceAll("<[^>]*>","") : "Unknown";
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
         String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
-        if (imageLinks != null && imageLinks.get("large") != null){
-            bookCover = imageLinks.get("large").asText();
-        } else if (imageLinks != null && imageLinks.get("thumbnail") != null) {
-            bookCover = imageLinks.get("thumbnail").asText();
+        if (imageLinks != null && imageLinks.get("thumbnail") != null){
+            bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
         }
         System.out.println("title: " + title);
         System.out.println("author: " + author);
@@ -91,13 +89,8 @@ public class GBRepository {
             String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
 
             String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
-            if (imageLinks != null && imageLinks.get("large") != null){
-                bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-            } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
-            {
+            if (imageLinks != null && imageLinks.get("thumbnail") != null){
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
-            } else{
-                bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
             System.out.println("bookcover: "+ bookCover);
 
@@ -139,12 +132,17 @@ public class GBRepository {
             String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
             String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
-            if (imageLinks != null && imageLinks.get("large") != null){
-                bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-            } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
-            {
+//            if (imageLinks != null && imageLinks.get("large") != null){
+//                bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
+//            } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
+//            {
+//                bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
+//            }
+
+            if (imageLinks != null && imageLinks.get("thumbnail") != null){
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
             }
+
             System.out.println("bookcover: "+ bookCover);
             bookList.add(new Book(id,title,author,year,averagePublicRating,summary,bookCover));
 
