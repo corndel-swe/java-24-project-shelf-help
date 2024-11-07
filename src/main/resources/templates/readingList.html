@@ -25,13 +25,13 @@
         <tbody>
         <tr th:each="entry : ${entries}">
             <td>
-                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 50px; height: auto;">
+                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 80px; height: auto;">
             </td>
-            <td th:text="${entry.getTitle()}">Book Title</td>
-            <td th:text="${entry.getAuthor()}">Author Name</td>
+            <td th:text="${entry.getTitle()}" class="truncate">Book Title</td>
+            <td th:text="${entry.getAuthor()}" class="truncate">Author Name</td>
             <td th:text="${entry.getYear()}">Year</td>
             <td th:text="${entry.isRead() ? 'Read' : 'Unread'}"></td>
-            <td th:text="${entry.getTag()}">Tag</td>
+            <td th:text="${entry.getTag()}" class="truncate">Tag</td>
 
             <td>
                 <form th:action="@{/setTag}" method="post">
@@ -40,7 +40,7 @@
                     <button type="submit">Set Tag</button>
                 </form>
             </td>
-            
+
             <td>
                 <form th:action="@{/markAsRead}" method="post">
                     <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
