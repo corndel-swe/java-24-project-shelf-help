@@ -70,11 +70,11 @@ public class BookController {
         String searchInput = ctx.queryParam("searchInput");
 //        String titleSearch = ctx.formParamAsClass("searchInput", String.class).get();
         System.out.println(searchInput+ " searchInput");
-
-        List<Book> booksByTitle = GBRepository.getBooksByTitle(searchInput);
-        System.out.println(booksByTitle);
+        List<Book> booksBySearch = GBRepository.getBooksBySearch(searchInput);
+//        List<Book> booksByTitle = GBRepository.getBooksByTitle(searchInput);
+//        System.out.println(booksByTitle);
 //        List<Book> booksByAuthor = GBRepository.getBooksByTitle(author);
-        ctx.render("/searchPage.html", Map.of("books", booksByTitle));
+        ctx.render("/searchPage.html", Map.of("books", booksBySearch));
         ctx.status(200);
     }
 
