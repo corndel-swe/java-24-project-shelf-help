@@ -33,10 +33,8 @@ public class App {
                     resolver.setPrefix("/templates/");
                     resolver.setSuffix(".html");
                     resolver.setTemplateMode("HTML");
-
                     var engine = new TemplateEngine();
                     engine.setTemplateResolver(resolver);
-
                     config.fileRenderer(new JavalinThymeleaf(engine));
                 });
 
@@ -56,11 +54,6 @@ public class App {
                 .post("/login", UserController::getUser)
                 .post("/register", UserController::addNewUser)
                 .get("/logout", UserController::logOut);
-
-
-
-
-
 
         app.exception(Exception.class, (e, ctx) -> {
             ctx.status(500);
