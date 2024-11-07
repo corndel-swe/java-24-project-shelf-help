@@ -11,7 +11,25 @@
 </header>
 
 <main>
-  <h1 th:text="'Hello ' + ${username} + '!'"></h1>
+  <section class="profile-header">
+    <div class="userProfile">
+    <h1>userProfile</h1>
+    <img th:src="${user.avatarUrl}" alt="User Avatar" />
+      <h2 th:text="${user.firstName} + ' ' + ${user.lastName}"></h2>
+      <p th:text="'@' + ${user.username}"></p>
+    </div>
+
+    <div class="userStats">
+     <h1>Stats</h1>
+      <p  th:text="${#numbers.formatDecimal(stats.average_rating, 1, 1)}"></p>
+      <p th:text="${stats.total_books}"></p>
+      <p th:text="${stats.total_books_read}"></p>
+      <p>Books Read: <span th:text="${stats.total_books_read} + '/' + ${stats.total_books}"></span></p>
+
+    </div>
+  </section>
+
+
 </main>
 
 <footer th:replace = "fragments :: footer"></footer>

@@ -2,6 +2,7 @@ package org.project.shelfhelp.controllers;
 import io.javalin.http.*;
 import org.project.shelfhelp.models.User;
 import org.project.shelfhelp.models.UserDTO;
+import org.project.shelfhelp.repositories.EntryRepository;
 import org.project.shelfhelp.repositories.UserRepository;
 
 import java.sql.SQLException;
@@ -69,6 +70,24 @@ public class UserController {
 
     public static void renderRegisterForm(Context ctx) {
         ctx.render("/register.html");
+    }
+
+    public static void renderProfile(Context ctx) throws SQLException {
+        String username = ctx.sessionAttribute("username");
+        if (username == null) {
+            ctx.redirect("/");
+            return;
+        }
+
+        var user = UserRepository.findUser(username);
+        System.out.println(user);
+        assert user != null;
+
+        int userId = user.getId();
+        var stats = EntryRepository.getStats(userId);
+        System.out.println(stats);
+
+        ctx.render("/profile.html", Map.of("user", user,  "stats", stats));
     }
 
 }
