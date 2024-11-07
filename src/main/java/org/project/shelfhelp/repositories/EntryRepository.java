@@ -1,7 +1,6 @@
 package org.project.shelfhelp.repositories;
 
 import org.project.shelfhelp.DB;
-import org.project.shelfhelp.models.Book;
 import org.project.shelfhelp.models.Entry;
 
 import java.sql.SQLException;
