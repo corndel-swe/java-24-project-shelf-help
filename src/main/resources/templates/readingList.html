@@ -4,34 +4,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
-    <title>User Reading List</title>
+    <title>Your Reading List</title>
 </head>
 <body>
 <header th:replace="fragments :: header"></header>
 
 <main>
-    <h1>Reading List</h1>
-    <table>
+    <h1>Your Reading List</h1>
+    <table class="readingListTable">
         <thead>
-        <tr>
+        <tr class="RLHeaders">
             <th>Cover</th>
             <th>Title</th>
             <th>Author</th>
             <th>Year</th>
             <th>Status</th>
             <th>Tag</th>
+            <th>Set tag</th>
+            <th>Mark as Read</th>
+
         </tr>
         </thead>
         <tbody>
-        <tr th:each="entry : ${entries}">
+        <tr th:each="entry : ${entries}" class="readingListTableRow">
             <td>
-                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 80px; height: auto;">
+                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 80px; height: auto; border-radius:5px;">
             </td>
             <td th:text="${entry.getTitle()}" class="truncate">Book Title</td>
             <td th:text="${entry.getAuthor()}" class="truncate">Author Name</td>
             <td th:text="${entry.getYear()}">Year</td>
             <td th:text="${entry.isRead() ? 'Read' : 'Unread'}"></td>
-            <td th:text="${entry.getTag()}" class="truncate">Tag</td>
+            <td th:text="${entry.getTag()}" class="truncate">Current Tag</td>
 
             <td>
                 <form th:action="@{/setTag}" method="post">
@@ -40,7 +43,7 @@
                     <button type="submit">Set Tag</button>
                 </form>
             </td>
-
+            
             <td>
                 <form th:action="@{/markAsRead}" method="post">
                     <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
