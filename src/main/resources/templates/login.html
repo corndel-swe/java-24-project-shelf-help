@@ -10,7 +10,8 @@
 <header>
 <img class="logo" src="/images/logo3.png" alt="ShelfHelp Logo">
 </header>
-
+<main>
+    <br><br>
 <form class="loginForm" action="/login" method="POST">
     <label for="username">username</label>
     <input type="text" name="username" id="username" />
@@ -20,6 +21,10 @@
 
     <button type="submit">login</button>
 </form>
+
+    <br><br>
+    <a href="/register" style="margin:0 auto;">Register a new account</a>
+</main>
 
 <footer th:replace = "fragments :: footer"></footer>
 </body>
