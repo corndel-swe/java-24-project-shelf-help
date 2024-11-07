@@ -12,40 +12,59 @@
 <main>
     <br>
     <section th:each="book : ${b}" class="bookContainer">
-        <div><img class="bookImg" th:src="${book.bookCover}" width="300" /></div>
-        <div class="bookDescription">
+        <div class="book-image"><img class="bookImg" th:src="${book.bookCover}"/></div>
+        <div class="bookDescription book-details">
             <table>
-                <tr>
+                <tr class="bookTable">
                     <td class="tableHeader">Title:</td>
                     <td th:text="${book.title}"></td>
                 </tr>
-                <tr>
+                <tr class="bookTable">
                     <td class="tableHeader">Author:</td>
                     <td th:text="${book.author}"></td>
                 </tr>
-                <tr>
+                <tr class="bookTable">
                     <td class="tableHeader">Release year:</td>
                     <td th:text="${book.year}"></td>
                 </tr>
-                <tr>
+                <tr class="bookTable">
                     <td class="tableHeader">Rating:</td>
                     <td th:text="${book.averageRating}+' stars'"></td>
                 </tr>
-                <tr>
-                    <td class="tableHeader">Summary:</td>
-                    <td th:text="${book.bookSummary}"></td>
-                </tr>
             </table>
+        </div>
+        <div th:each="book : ${b}" class="book-summary bookDescription">
+            <h2>Summary:</h2>
+            <div th:text="${book.bookSummary}"></div>
+        </div>
+        <div th:each="book : ${b}" class="book-add">
+            <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post" style="height=100%;">
+                <button class="custom-button-details center" role="button">
+                    <div class="svg-wrapper-1">
+                        <div class="svg-wrapper">
+                            <svg
+                                    xmlns="http://www.w3.org/2000/svg"
+                                    viewBox="0 0 24 24"
+                                    width="24"
+                                    height="24"
+                            >
+                                <path fill="none" d="M0 0h24v24H0z"></path>
+                                <path
+                                        fill="currentColor"
+                                        d="M19 13H13V19H11V13H5V11H11V5H13V11H19V13Z"
+                                ></path>
+                            </svg>
+                        </div>
+                    </div>
+                    <span>Add</span></button>
+            </form>
         </div>
 
     </section>
     <br>
 
-    <div th:each="book : ${b}" class="formButton">
-        <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post" class="formButton">
-            <button class="button-5" role="button">Add to reading list</button>
-        </form>
-    </div>
+
+
 
 
 </main>
