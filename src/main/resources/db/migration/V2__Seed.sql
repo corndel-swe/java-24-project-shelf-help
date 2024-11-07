@@ -9,7 +9,7 @@ INSERT INTO books (id, title, author, release_year, average_rating, summary, cov
 INSERT INTO users (first_name, last_name, username, password, avatar_url) VALUES
 ('Alice', 'Johnson', 'alicej', 'password123', 'https://example.com/alice.jpg'),
 ('Bob', 'Smith', 'bobsmith', 'securepass456', 'https://example.com/bob.jpg'),
-('Charlie', 'Brown', 'charlieb', 'mypassword789', 'https://example.com/charlie.jpg');
+('Hala', 'Hassan', 'Hala', 'pass123', 'https://example.com/charlie.jpg');
 
 -- Insert dummy data into the 'reading_lists' table
 INSERT INTO reading_lists (user_id, book_id, is_read, tag) VALUES
