@@ -57,7 +57,7 @@ nav{
  display: block;
   margin: auto;
   width: 48%;
-  height:60%
+  height:auto
     }
 
 /* Add a grey background color to the top navigation */
@@ -121,8 +121,9 @@ nav{
 }
 
 td{
-    vertical-align:top;
+    vertical-align:center;
     height:auto;
+    min-width: 100px;
 }
 
 
@@ -201,6 +202,23 @@ width:70%;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 15px;
+}
+
+.readingListTable{
+    width: 90%;
+    margin: 0 auto;
+    text-align: center;
+    border-collapse: collapse;
+}
+
+.readingListTableRow{
+    border-bottom: 2px solid #f1f1f1;
+    min-height: 130px;
+}
+
+.RLHeaders{
+    background-color: #009879;
+    color: #ffffff;
 }
 
 
