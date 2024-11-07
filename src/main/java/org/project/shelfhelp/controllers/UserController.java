@@ -8,6 +8,7 @@ import org.project.shelfhelp.repositories.UserRepository;
 import java.security.MessageDigest;
 import java.sql.SQLException;
 import java.security.MessageDigest;
+import java.util.Map;
 
 
 public class UserController {
