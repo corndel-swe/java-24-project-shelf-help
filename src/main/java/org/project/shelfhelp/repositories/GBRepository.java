@@ -165,14 +165,14 @@ public class GBRepository {
     }
 
     //// HERE FOR DEBUGGING
-public static void main(String[] args) throws Exception {
-    GBRepository.getABookbyId("HestSXO362YC");
-    System.out.println("-------");
-
-    GBRepository.getBooksByTitle("adventure of sherlock");
-    System.out.println("-------");
-//    GBRepository.getBooksByAuthor("meyers");
-}
+//public static void main(String[] args) throws Exception {
+//    GBRepository.getABookbyId("HestSXO362YC");
+//    System.out.println("-------");
+//
+//    GBRepository.getBooksByTitle("adventure of sherlock");
+//    System.out.println("-------");
+////    GBRepository.getBooksByAuthor("meyers");
+//}
 
 
 }
