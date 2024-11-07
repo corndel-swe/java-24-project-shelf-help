@@ -13,10 +13,13 @@
 <main>
   <section class="profile-header">
     <div class="userProfile">
-    <h1>userProfile</h1>
-    <img th:src="${user.avatarUrl}" alt="User Avatar" />
-      <h2 th:text="${user.firstName} + ' ' + ${user.lastName}"></h2>
-      <p th:text="'@' + ${user.username}"></p>
+        <p  class="profile" th:text="'@' + ${user.username}"></p>
+        <div >
+    <img class="profileImage" th:src="${user.avatarUrl}" alt="User Avatar" />
+        </div>
+        <div  class="textContainer">
+            <h2  class="name" th:text="${user.firstName} + ' ' + ${user.lastName}"></h2>
+        </div>
     </div>
 
     <div class="userStats">
