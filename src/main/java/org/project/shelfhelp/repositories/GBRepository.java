@@ -9,6 +9,7 @@ import org.project.shelfhelp.models.Book;
 import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class GBRepository {
 
@@ -110,7 +111,6 @@ public class GBRepository {
 //        return null;// DEBUGGING
         return bookList;
     }
-
     public static List <Book> getBooksByAuthor(String author) throws Exception {
 
         String url = "https://www.googleapis.com/books/v1/volumes/?q=inauthor:" + author;
@@ -153,6 +153,14 @@ public class GBRepository {
 //        return null;// DEBUGGING
         return bookList;
     }
+
+    public static List<Book> getBooksBySearch(String searchInput) throws Exception {
+        List<Book> books = new ArrayList<>();
+        books.addAll(getBooksByTitle(searchInput));
+        books.addAll(getBooksByAuthor(searchInput));
+        return books.stream().distinct().toList();
+    }
+
 
     //// HERE FOR DEBUGGING
 //public static void main(String[] args) throws Exception {
