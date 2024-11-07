@@ -7,9 +7,9 @@ INSERT INTO books (id, title, author, release_year, average_rating, summary, cov
 
 -- Insert dummy data into the 'users' table
 INSERT INTO users (first_name, last_name, username, password, avatar_url) VALUES
-('Alice', 'Johnson', 'alicej', '%�It�8��R���н�F� cc�Z��1', 'https://example.com/alice.jpg'),
-('Bob', 'Smith', 'bobsmith', '��O;=}J��_�J|��ء�k��C��@N��G�^�', 'https://example.com/bob.jpg'),
-('Hala', 'Hassan', 'Hala', '%��;��Wڶ�*.}��|�L�.�]�', 'https://example.com/charlie.jpg');
+('Alice', 'Johnson', 'alicej', '%�It�8��R���н�F� cc�Z��1', 'https://avatar.iran.liara.run/public/job/operator/male'),
+('Bob', 'Smith', 'bobsmith', '��O;=}J��_�J|��ء�k��C��@N��G�^�', 'https://avatar.iran.liara.run/public/17'),
+('Hala', 'Hassan', 'Hala', '%��;��Wڶ�*.}��|�L�.�]�', 'https://avatar.iran.liara.run/public/91');
 
 -- Insert dummy data into the 'reading_lists' table
 INSERT INTO reading_lists (user_id, book_id, is_read, tag) VALUES
