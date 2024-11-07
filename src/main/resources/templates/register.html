@@ -12,7 +12,8 @@
 <form class="loginForm" action="/register" method="POST">
     <p>
     <label for="username">username (req)</label>
-    <input type="text" name="username" id="username" required/>
+    <input type="text" name="username" id="username"
+           minlength="3" maxlength="10" required/>
     </p>
     <label for="firstName">first name (req)</label>
     <input type="text" name="firstName" id="firstName" required/>
@@ -22,7 +23,7 @@
     </p>
     <p>
     <label for="avatarUrl">avatar</label>
-    <input type="url" name="avatarUrl" id="avatarUrl" />
+    <input type="url" name="avatarUrl" id="avatarUrl" value="http://"/>
     </p>
     <p>
     <label for="password">password (req)</label>
