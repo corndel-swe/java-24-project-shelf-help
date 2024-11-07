@@ -40,6 +40,10 @@ public class UserController {
         String password = ctx.formParamAsClass("password", String.class).get();
         String avatarUrl = ctx.formParamAsClass("avatarUrl", String.class).get();
 
+        System.out.println("before: " + avatarUrl);
+        avatarUrl = UserRepository.validateAvatarUrl(avatarUrl);
+        System.out.println("after: " + avatarUrl);
+
         UserDTO body = new UserDTO(avatarUrl, password, username, lastName, firstName);
 
         int response = UserRepository.insertNewUser(body);
