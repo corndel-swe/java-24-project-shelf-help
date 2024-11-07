@@ -46,8 +46,6 @@ public class GBRepository {
             bookCover = imageLinks.get("large").asText();
         } else if (imageLinks != null && imageLinks.get("thumbnail") != null) {
             bookCover = imageLinks.get("thumbnail").asText();
-        } else {
-            bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
         }
         System.out.println("title: " + title);
         System.out.println("author: " + author);
