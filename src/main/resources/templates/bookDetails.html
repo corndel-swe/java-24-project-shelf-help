@@ -34,7 +34,7 @@
                 </tr>
             </table>
         </div>
-        <div th:each="book : ${b}" class="book-summary bookDescription">
+        <div th:each="book : ${b}" class="book-summary">
             <h2>Summary:</h2>
             <div th:text="${book.bookSummary}"></div>
         </div>

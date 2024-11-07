@@ -110,6 +110,17 @@ nav{
 
 .book-summary{
     grid-area: p2;
+      overflow: scroll;
+       display: -webkit-box;
+       -webkit-line-clamp: 1; /* number of lines to show */
+               line-clamp: 1;
+       -webkit-box-orient: vertical;
+    max-height:500px;
+    min-height:300px;
+    padding: 0 50px 0 50px;
+    border-top-right-radius: 25px;
+    border-bottom-right-radius: 25px;
+    background-color: #fff;
 }
 
 .book-image{
@@ -151,6 +162,11 @@ nav{
     padding: 0 50px 0 50px;
     border-top-right-radius: 25px;
     border-bottom-right-radius: 25px;
+  overflow: hidden;
+   display: -webkit-box;
+   -webkit-line-clamp: 1; /* number of lines to show */
+           line-clamp: 1;
+   -webkit-box-orient: vertical;
 
 }
 
