@@ -14,7 +14,7 @@
     <table>
         <thead>
         <tr>
-            <th>Book ID</th>
+            <th>Cover</th>
             <th>Title</th>
             <th>Author</th>
             <th>Year</th>
@@ -24,7 +24,9 @@
         </thead>
         <tbody>
         <tr th:each="entry : ${entries}">
-            <td th:text="${entry.getBookId()}">Book ID</td>
+            <td>
+                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 50px; height: auto;">
+            </td>
             <td th:text="${entry.getTitle()}">Book Title</td>
             <td th:text="${entry.getAuthor()}">Author Name</td>
             <td th:text="${entry.getYear()}">Year</td>
@@ -38,7 +40,7 @@
                     <button type="submit">Set Tag</button>
                 </form>
             </td>
-
+            
             <td>
                 <form th:action="@{/markAsRead}" method="post">
                     <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
@@ -47,7 +49,6 @@
             </td>
         </tr>
         </tbody>
-
     </table>
 </main>
 

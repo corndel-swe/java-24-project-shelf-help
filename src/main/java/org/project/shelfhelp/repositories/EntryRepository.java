@@ -1,7 +1,6 @@
 package org.project.shelfhelp.repositories;
 
 import org.project.shelfhelp.DB;
-import org.project.shelfhelp.models.Book;
 import org.project.shelfhelp.models.Entry;
 
 import java.sql.SQLException;
@@ -17,19 +16,31 @@ public class EntryRepository {
     }
 
     public static Entry createEntry(int userId, String bookId, String tag) {
+        String checkQuery = "SELECT * FROM reading_lists WHERE user_id = ? AND book_id = ?";
         String insertQuery = "INSERT INTO reading_lists (user_id, book_id, is_read, tag) VALUES (?, ?, ?, ?)";
 
         try (var conn = DB.getConnection();
-             var statement = conn.prepareStatement(insertQuery)) {
+             var checkStmt = conn.prepareStatement(checkQuery)) {
 
-            statement.setInt(1, userId);
-            statement.setString(2, bookId);
-            statement.setBoolean(3, false);
-            statement.setString(4, tag);
+            checkStmt.setInt(1, userId);
+            checkStmt.setString(2, bookId);
+            try (var rs = checkStmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Entry with user_id " + userId + " and book_id " + bookId + " already exists.");
+                    return null;
+                }
+            }
 
-            int rowsInserted = statement.executeUpdate();
-            if (rowsInserted > 0) {
-                return new Entry(userId, bookId, tag);
+            try (var insertStmt = conn.prepareStatement(insertQuery)) {
+                insertStmt.setInt(1, userId);
+                insertStmt.setString(2, bookId);
+                insertStmt.setBoolean(3, false);
+                insertStmt.setString(4, tag);
+
+                int rowsInserted = insertStmt.executeUpdate();
+                if (rowsInserted > 0) {
+                    return new Entry(userId, bookId, tag);
+                }
             }
         } catch (SQLException e) {
             System.err.println("SQL exception occurred: " + e.getMessage());
@@ -37,6 +48,7 @@ public class EntryRepository {
 
         return null;
     }
+
 
     public static List<Entry> findByUser(int userId) throws SQLException {
         var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id WHERE user_id = ?";
