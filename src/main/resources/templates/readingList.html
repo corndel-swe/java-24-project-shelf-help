@@ -47,7 +47,7 @@
             <td>
                 <form th:action="@{/markAsRead}" method="post">
                     <input type="hidden" name="bookId" th:value="${entry.getBookId()}"/>
-                    <button type="submit" th:disabled="${entry.isRead()}">Mark as Read</button>
+                    <button type="submit" th:disabled="${entry.isRead()}" style="height:70px">Mark as Read</button>
                 </form>
             </td>
         </tr>
