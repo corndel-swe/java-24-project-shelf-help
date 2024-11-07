@@ -14,14 +14,14 @@
     <br><br>
 <form class="loginForm" action="/register" method="POST">
     <p>
-    <label for="username">username (req)</label>
+    <label for="username">username*</label>
     <input type="text" name="username" id="username"
            minlength="3" maxlength="10" required/>
     </p>
-    <label for="firstName">first name (req)</label>
+    <label for="firstName">first name*</label>
     <input type="text" name="firstName" id="firstName" required/>
     <p>
-    <label for="lastName">last name (req)</label>
+    <label for="lastName">last name*</label>
     <input type="text" name="lastName" id="lastName" required/>
     </p>
     <p>
@@ -29,7 +29,7 @@
     <input type="url" name="avatarUrl" id="avatarUrl" value="http://"/>
     </p>
     <p>
-    <label for="password">password (req)</label>
+    <label for="password">password*</label>
         <input type="password" name="password" pattern="(?=.*\d)(?=.*[\W_]).{8,}"
                title="8 characters, at least one special character and one number"
                id="password">
