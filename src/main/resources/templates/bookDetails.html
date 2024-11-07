@@ -14,6 +14,7 @@
     <section th:each="book : ${b}" class="bookContainer">
         <div class="book-image"><img class="bookImg" th:src="${book.bookCover}"/></div>
         <div class="bookDescription book-details">
+            <h2>More details:</h2>
             <table>
                 <tr class="bookTable">
                     <td class="tableHeader">Title:</td>

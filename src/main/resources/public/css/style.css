@@ -160,7 +160,7 @@ nav{
     }
 
 h2{
-    color: #009879;
+    color: #9867C5;
 }
 
 .bookTable{
@@ -254,7 +254,7 @@ width:70%;
 }
 
 .readingListTable{
-    width: 90%;
+    width: 1200px;
     margin: 0 auto;
     text-align: center;
     border-collapse: collapse;
