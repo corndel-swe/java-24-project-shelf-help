@@ -38,7 +38,7 @@
             <div th:text="${book.bookSummary}"></div>
         </div>
         <div th:each="book : ${b}" class="book-add">
-            <form th:action="@{/book/addBook/{id}(id=${book.id})}" method="post" style="height=100%;">
+            <form class="formCenter" th:action="@{/book/addBook/{id}(id=${book.id})}" method="post">
                 <button class="custom-button-details center" role="button">
                     <div class="svg-wrapper-1">
                         <div class="svg-wrapper">
@@ -58,6 +58,7 @@
                     </div>
                     <span>Add</span></button>
             </form>
+
         </div>
 
     </section>

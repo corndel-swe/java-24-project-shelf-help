@@ -382,3 +382,14 @@ margin:30px;
 }
 
 /* Style Ends profile bar*/
+
+.formCenter{
+  display: flex;
+    justify-content: center;
+    align-items: center;
+    height:100%
+}
+.custom-button-details span{
+ display: inline-block;
+    text-align: center;
+}
