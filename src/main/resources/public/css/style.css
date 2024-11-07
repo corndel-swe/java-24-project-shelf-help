@@ -57,7 +57,7 @@ nav{
  display: block;
   margin: auto;
   width: 48%;
-  height:60%
+  height:auto
     }
 
 /* Add a grey background color to the top navigation */
@@ -178,13 +178,7 @@ margin: 0 auto;
 width:70%;
 }
 
-
-
-
-
-
 /* Style bookCover bar*/
-
 
 .loginForm {
       margin:auto;
@@ -193,6 +187,11 @@ width:70%;
       border-radius: 8px;
       box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
       padding: 15px;
+}
+
+.readingListTable{
+align:top;
+
 }
 
 
