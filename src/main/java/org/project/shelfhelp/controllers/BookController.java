@@ -67,7 +67,8 @@ public class BookController {
     }
 
     public static void  SearchRender(Context ctx) throws Exception {
-        String searchInput = ctx.queryParam("searchInput");
+//        String searchInput = ctx.queryParam("searchInput");
+        String searchInput = ctx.queryParam("searchInput") == null? "adventures": ctx.queryParam("searchInput");
 //        String titleSearch = ctx.formParamAsClass("searchInput", String.class).get();
         System.out.println(searchInput+ " searchInput");
         List<Book> booksBySearch = GBRepository.getBooksBySearch(searchInput);
