@@ -1,9 +1,10 @@
 package org.project.shelfhelp.controllers;
 
 import io.javalin.http.Context;
-import org.project.shelfhelp.models.Entry;
+import org.project.shelfhelp.repositories.BookRepository;
 import org.project.shelfhelp.repositories.EntryRepository;
 
+import java.sql.SQLException;
 import java.util.Map;
 
 public class EntryController {
@@ -31,6 +32,26 @@ public class EntryController {
             ctx.status(400).json("Can't mark book as read");
         }
     }
+
+    public static void deleteEntry(Context ctx) throws SQLException {
+        try {
+            int userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
+            String bookId = ctx.formParam("bookId");
+            EntryRepository.deleteEntry(userId, bookId);
+
+            var entries = EntryRepository.findAll();
+            var isBookInOtherUsers = entries.stream()
+                    .anyMatch(entry -> entry.getBookId().equals(bookId) && entry.getUserId() != userId);
+            if (!isBookInOtherUsers) {
+                BookRepository.deleteBook(bookId);
+            }
+
+            ctx.redirect("/readingList");
+        } catch (Exception e) {
+            ctx.status(400).json("Can't delete entry");
+        }
+    }
+
 
     public static void getStats(Context ctx) {
         try {
