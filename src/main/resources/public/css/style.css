@@ -122,8 +122,8 @@ nav{
 
 td{
     vertical-align:center;
-    height:auto;
-    min-width: 100px;
+    height:120px;
+    min-width: 80px;
 }
 
 
@@ -145,8 +145,6 @@ td{
   font-weight: 600;
   justify-content: center;
   line-height: 1.25;
-  min-height: 3rem;
-  padding: calc(.875rem - 1px) calc(1.5rem - 1px);
   position: relative;
   text-decoration: none;
   transition: all 250ms;
@@ -155,7 +153,8 @@ td{
   touch-action: manipulation;
   vertical-align: baseline;
   width: 100%;
-  margin: 0 auto;
+  max-width: 80px;
+  margin: 10px auto;
 }
 
 .button-5:hover,
