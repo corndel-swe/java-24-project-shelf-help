@@ -6,6 +6,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import kong.unirest.Unirest;
 import org.project.shelfhelp.models.Book;
 
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -35,17 +36,16 @@ public class GBRepository {
         for (JsonNode item : volumeInfo.get("authors")){
             authorList.add(item.asText());
         }
-        String title = String.valueOf(volumeInfo.get("title")).replace("\"","");
+        String title = volumeInfo.get("title").asText();
         String author = String.join(", ", authorList);
-        String year = String.valueOf(volumeInfo.get("publishedDate")).substring(0, 4);
-        String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
+        String year = volumeInfo.get("publishedDate").asText().substring(0, 4);
+        String summary = String.valueOf(volumeInfo.get("description")).replaceAll("\"", "").replaceAll("<[^>]*>","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
         String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
         if (imageLinks != null && imageLinks.get("large") != null){
-            bookCover = String.valueOf(imageLinks.get("large")).replace("\"","");
-        } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
-        {
-            bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
+            bookCover = imageLinks.get("large").asText();
+        } else if (imageLinks != null && imageLinks.get("thumbnail") != null) {
+            bookCover = imageLinks.get("thumbnail").asText();
         }
         System.out.println("title: " + title);
         System.out.println("author: " + author);
