@@ -28,13 +28,13 @@
         <tbody>
         <tr th:each="entry : ${entries}" class="readingListTableRow">
             <td>
-                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 75px; height: auto; border-radius:5px;">
+                <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 80px; height: auto; border-radius:5px;">
             </td>
-            <td th:text="${entry.getTitle()}">Book Title</td>
-            <td th:text="${entry.getAuthor()}">Author Name</td>
+            <td th:text="${entry.getTitle()}" class="truncate">Book Title</td>
+            <td th:text="${entry.getAuthor()}" class="truncate">Author Name</td>
             <td th:text="${entry.getYear()}">Year</td>
             <td th:text="${entry.isRead() ? 'Read' : 'Unread'}"></td>
-            <td th:text="${entry.getTag()}">Current Tag</td>
+            <td th:text="${entry.getTag()}" class="truncate">Current Tag</td>
 
             <td>
                 <form th:action="@{/setTag}" method="post">

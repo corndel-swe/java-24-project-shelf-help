@@ -8,6 +8,8 @@ import org.project.shelfhelp.models.UserDTO;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class UserRepository {
 
@@ -74,6 +76,22 @@ public class UserRepository {
                 }
             }
             return -1;
+        }
+    }
+
+    public static String validateAvatarUrl(String avatarUrl){
+        if(avatarUrl.equals("http://") | avatarUrl.equals("https://")){
+            return "";
+        }
+
+        Pattern pattern = Pattern.compile(".*\\.(jpe?g|png)$");
+        Matcher matcher = pattern.matcher(avatarUrl);
+        boolean hasImgExtension = matcher.matches();
+
+        if(hasImgExtension){
+            return avatarUrl;
+        } else {
+            return "";
         }
     }
 }

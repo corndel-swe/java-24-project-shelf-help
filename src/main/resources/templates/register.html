@@ -4,34 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="/css/style.css">
-    <title>Document</title>
+    <title>Register</title>
 </head>
 <body>
 <header th:replace = "fragments :: header"></header>
 
 <form class="loginForm" action="/register" method="POST">
     <p>
-    <label for="username">username </label>
-    <input type="text" name="username" id="username" />
+    <label for="username">username (req)</label>
+    <input type="text" name="username" id="username"
+           minlength="3" maxlength="10" required/>
     </p>
-    <label for="firstName">first Name</label>
-    <input type="text" name="firstName" id="firstName" />
+    <label for="firstName">first name (req)</label>
+    <input type="text" name="firstName" id="firstName" required/>
     <p>
-    <label for="lastName">last Name</label>
-    <input type="text" name="lastName" id="lastName" />
+    <label for="lastName">last name (req)</label>
+    <input type="text" name="lastName" id="lastName" required/>
     </p>
     <p>
     <label for="avatarUrl">avatar</label>
-    <input type="url" name="avatarUrl" id="avatarUrl" />
+    <input type="url" name="avatarUrl" id="avatarUrl" value="http://"/>
     </p>
     <p>
-    <label for="password">password</label>
+    <label for="password">password (req)</label>
         <input type="password" name="password" pattern="(?=.*\d)(?=.*[\W_]).{8,}"
                title="8 characters, at least one special character and one number"
-               id="password"></p>
+               id="password">
     </p>
-
-
 
     <button type="submit">register</button>
 </form>
