@@ -7,8 +7,11 @@
     <title>Register</title>
 </head>
 <body>
-<header th:replace = "fragments :: header"></header>
-
+<header>
+    <img class="logo" src="/images/logo3.png" alt="ShelfHelp Logo">
+</header>
+<main>
+    <br><br>
 <form class="loginForm" action="/register" method="POST">
     <p>
     <label for="username">username (req)</label>
@@ -34,6 +37,8 @@
 
     <button type="submit">register</button>
 </form>
+    <br><br>
+</main>
 
 <footer th:replace = "fragments :: footer"></footer>
 
