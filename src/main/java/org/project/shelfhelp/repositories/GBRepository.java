@@ -36,7 +36,7 @@ public class GBRepository {
         }
         String title = String.valueOf(volumeInfo.get("title")).replace("\"","");
         String author = String.join(", ", authorList);
-        String year = (String.valueOf(volumeInfo.get("publishedDate")).replace("\"",""));
+        String year = String.valueOf(volumeInfo.get("publishedDate")).substring(0, 4);
         String summary = String.valueOf(volumeInfo.get("description")).replace("\"","").replaceAll("<[^>]*>","");
         float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));
         String bookCover =  "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
@@ -95,8 +95,9 @@ public class GBRepository {
             } else if (imageLinks != null && imageLinks.get("thumbnail") != null)
             {
                 bookCover = String.valueOf(imageLinks.get("thumbnail")).replace("\"","");
+            } else{
+                bookCover = "https://demo.publishr.cloud/assets/common/images/edition_placeholder.png";
             }
-
             System.out.println("bookcover"+ bookCover);
 
             float averagePublicRating = (volumeInfo.get("averageRating") == null) ? 0 : Float.parseFloat(String.valueOf(volumeInfo.get("averageRating")));

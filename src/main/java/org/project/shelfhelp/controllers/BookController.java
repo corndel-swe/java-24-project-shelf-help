@@ -15,7 +15,7 @@ public class BookController {
 
     public static void addBook(Context ctx) throws Exception {
         var bookId = ctx.pathParam("bookId");
-        Book book = GBRepository.getABookbyId(bookId);
+        var book = GBRepository.getABookbyId(bookId);
         System.out.println(book);
         Book addedBook = BookRepository.addBook(
                 book.getId(),
@@ -27,11 +27,11 @@ public class BookController {
                 book.getBookCover()
         );
         var userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
-        var username = ctx.sessionAttribute("username") != null ? ctx.sessionAttribute("username") : "";
-        Entry entry = EntryRepository.createEntry(userId, bookId);
-        ctx.redirect("/readingList");
+        var entry = EntryRepository.createEntry(userId, bookId);
 
+        ctx.redirect("/readingList");
 }
+
         public static void removeBook(Context ctx) throws SQLException {
                 var id =ctx.pathParam("bookId");
                 var deletedBook = BookRepository.deleteBook(id);

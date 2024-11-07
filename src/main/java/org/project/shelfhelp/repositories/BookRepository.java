@@ -102,39 +102,50 @@ public class BookRepository {
         }
     }
 
-    public static Book addBook(String id, String bookTitle, String bookAuthor, String release_year, float average_rate , String summary, String cover_url) throws SQLException {
-        var query = "INSERT INTO books (id, title, author, release_year, average_rating, summary,cover_url) VALUES (?, ?, ?, ?,?, ?,?) RETURNING *";
+    public static Book addBook(String id, String bookTitle, String bookAuthor, String release_year, float average_rate, String summary, String cover_url) throws SQLException {
+        String checkQuery = "SELECT * FROM books WHERE id = ?";
+        String insertQuery = "INSERT INTO books (id, title, author, release_year, average_rating, summary, cover_url) VALUES (?, ?, ?, ?, ?, ?, ?) RETURNING *";
 
         try (var con = DB.getConnection();
-             var statement = con.prepareStatement(query);) {
+             var checkStmt = con.prepareStatement(checkQuery)) {
 
-
-            statement.setString(1, id);
-            statement.setString(2, bookTitle);
-            statement.setString(3, bookAuthor);
-            statement.setString(4, release_year);
-            statement.setFloat(5,average_rate);
-            statement.setString(6,summary);
-            statement.setString(7,cover_url);
-            try (var rs = statement.executeQuery();){
-
-                if(rs.next()){
-                    var bookId = rs.getString("id");
-                    var title = rs.getString("title");
-                    var author = rs.getString("author");
-                    var year = rs.getString("release_year");
-                    var averageRating = rs.getFloat("average_rating");
-                    var bookSummary= rs.getString("summary");
-                    var bookCover = rs.getString("cover_url");
-
-                    return new Book(bookId,title, author, year, averageRating, bookSummary, bookCover);
-                }else{
-                    System.out.println("Cannot insert books.");
+            checkStmt.setString(1, id);
+            try (var rs = checkStmt.executeQuery()) {
+                if (rs.next()) {
+                    System.out.println("Book with id " + id + " already exists.");
                     return null;
+                }
+            }
+
+            try (var insertStmt = con.prepareStatement(insertQuery)) {
+                insertStmt.setString(1, id);
+                insertStmt.setString(2, bookTitle);
+                insertStmt.setString(3, bookAuthor);
+                insertStmt.setString(4, release_year);
+                insertStmt.setFloat(5, average_rate);
+                insertStmt.setString(6, summary);
+                insertStmt.setString(7, cover_url);
+
+                try (var insertRs = insertStmt.executeQuery()) {
+                    if (insertRs.next()) {
+                        var bookId = insertRs.getString("id");
+                        var title = insertRs.getString("title");
+                        var author = insertRs.getString("author");
+                        var year = insertRs.getString("release_year");
+                        var averageRating = insertRs.getFloat("average_rating");
+                        var bookSummary = insertRs.getString("summary");
+                        var bookCover = insertRs.getString("cover_url");
+
+                        return new Book(bookId, title, author, year, averageRating, bookSummary, bookCover);
+                    } else {
+                        System.out.println("Cannot insert book.");
+                        return null;
+                    }
                 }
             }
         }
     }
+
 
     // testing
     public static void main(String[] args) throws Exception {
