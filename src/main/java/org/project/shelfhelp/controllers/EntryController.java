@@ -87,8 +87,10 @@ public class EntryController {
 
             ctx.render("readingList.html", Map.of("entries", entries));
         } catch (IllegalArgumentException e) {
+            ctx.redirect("/");
             ctx.status(400).json(Map.of("Error", e.getMessage()));
         } catch (Exception e) {
+            ctx.redirect("/");
             ctx.status(500).json(Map.of("Error", e.getMessage()));
             e.printStackTrace();
         }
