@@ -28,7 +28,9 @@
         <tbody>
         <tr th:each="entry : ${entries}" class="readingListTableRow">
             <td>
+        <a th:href="@{/details/{id}(id=${entry.getBookId()})}">
                 <img th:src="${entry.getBookCover()}" alt="Book Cover" style="width: 80px; height: auto; border-radius:5px;">
+        </a>
             </td>
             <td th:text="${entry.getTitle()}" class="truncate">Book Title</td>
             <td th:text="${entry.getAuthor()}" class="truncate">Author Name</td>
@@ -58,6 +60,7 @@
                 </form>
             </td>
         </tr>
+
         </tbody>
     </table>
 </main>
