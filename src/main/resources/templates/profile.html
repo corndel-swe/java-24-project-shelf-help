@@ -24,7 +24,7 @@
 
     <div class="userStats">
      <h1  class="name">Reading Stats</h1>
-      <p  class="name"> Rating: <span th:text="${#numbers.formatDecimal(stats.average_rating, 1, 1)}"></span> </p>
+      <p  class="name"> Average Rating: <span th:text="${#numbers.formatDecimal(stats.average_rating, 1, 1)}"></span> </p>
         <p  class="name"> Total Books: <span th:text="${stats.total_books}"></span> </p>
         <p  class="name"> Total Books Read: <span th:text="${stats.total_books_read}"></span> </p>
       <p  class="name">Books Read: <span th:text="${stats.total_books_read} + '/' + ${stats.total_books}"></span></p>
