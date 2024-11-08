@@ -79,9 +79,12 @@ public class EntryController {
         try {
             int userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
 
-            if (userId == 0) {
+            String username = ctx.sessionAttribute("username");
+            if (username == null) {
                 ctx.redirect("/");
+                return;
             }
+
 
             var entries = EntryRepository.findByUser(userId);
 
