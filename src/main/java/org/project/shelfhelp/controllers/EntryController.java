@@ -80,7 +80,7 @@ public class EntryController {
             int userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
 
             if (userId == 0) {
-                throw new IllegalArgumentException("Invalid input");
+                ctx.redirect("/");
             }
 
             var entries = EntryRepository.findByUser(userId);
@@ -89,6 +89,7 @@ public class EntryController {
         } catch (IllegalArgumentException e) {
             ctx.status(400).json(Map.of("Error", e.getMessage()));
         } catch (Exception e) {
+            ctx.redirect("/");
             ctx.status(500).json(Map.of("Error", e.getMessage()));
             e.printStackTrace();
         }

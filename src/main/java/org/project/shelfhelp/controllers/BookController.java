@@ -68,6 +68,11 @@ public class BookController {
 
     public static void  SearchRender(Context ctx) throws Exception {
 //        String searchInput = ctx.queryParam("searchInput");
+        int userId = ctx.sessionAttribute("id") != null ? (int) ctx.sessionAttribute("id") : 0;
+
+        if (userId == 0) {
+            ctx.redirect("/");
+        }
         String searchInput = ctx.queryParam("searchInput") == null? "adventures": ctx.queryParam("searchInput");
 //        String titleSearch = ctx.formParamAsClass("searchInput", String.class).get();
         System.out.println(searchInput+ " searchInput");
