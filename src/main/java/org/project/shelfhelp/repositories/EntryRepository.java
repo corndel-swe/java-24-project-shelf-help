@@ -2,7 +2,6 @@ package org.project.shelfhelp.repositories;
 
 import org.project.shelfhelp.DB;
 import org.project.shelfhelp.models.Entry;
-
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -66,21 +65,20 @@ public class EntryRepository {
                 System.out.println("No entry found for user ID: " + userId + ", book ID: " + bookId + ". Delete failed.");
             }
         } catch (SQLException e) {
-            System.err.println("Failed to delete entry for user ID: " + userId + ", book ID: " + bookId + ". Error: " + e.getMessage());
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
     }
 
-    public static List<Entry> findByUser(int userId) throws SQLException {
+    public static List<Entry> findByUser(int userId) {
         var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id WHERE user_id = ?";
+        List<Entry> entries = new ArrayList<>();
 
         try (var con = DB.getConnection();
-             var stmt = con.prepareStatement(query);) {
+             var stmt = con.prepareStatement(query)) {
 
             stmt.setInt(1, userId);
 
-            try (var rs = stmt.executeQuery();) {
-                List<Entry> entries = new ArrayList<>();
-
+            try (var rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     var bookId = rs.getString("book_id");
                     var bookTitle = rs.getString("title");
@@ -92,22 +90,22 @@ public class EntryRepository {
 
                     entries.add(new Entry(bookId, bookTitle, author, year, bookCover, isRead, tag));
                 }
-
-                return entries;
             }
+        } catch (SQLException e) {
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
+
+        return entries;
     }
 
-    public static List<Entry> findAll() throws SQLException {
+    public static List<Entry> findAll() {
         var query = "SELECT * FROM reading_lists JOIN books ON books.id = reading_lists.book_id";
+        List<Entry> entries = new ArrayList<>();
 
         try (var con = DB.getConnection();
-             var stmt = con.prepareStatement(query);) {
+             var stmt = con.prepareStatement(query)) {
 
-
-            try (var rs = stmt.executeQuery();) {
-                List<Entry> entries = new ArrayList<>();
-
+            try (var rs = stmt.executeQuery()) {
                 while (rs.next()) {
                     var bookId = rs.getString("book_id");
                     var bookTitle = rs.getString("title");
@@ -119,11 +117,14 @@ public class EntryRepository {
 
                     entries.add(new Entry(bookId, bookTitle, author, year, bookCover, isRead, tag));
                 }
-
-                return entries;
             }
+        } catch (SQLException e) {
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
+
+        return entries;
     }
+
 
     public static void setTag(int userId, String bookId, String tag) {
         String setTagQuery = "UPDATE reading_lists SET tag = ? WHERE user_id = ? AND book_id = ?";
@@ -143,7 +144,7 @@ public class EntryRepository {
                 System.out.println("No entry found for user ID: " + userId + ", book ID: " + bookId + ".");
             }
         } catch (SQLException e) {
-            System.err.println("Failed to update tag for user ID: " + userId + ", book ID: " + bookId);
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
     }
 
@@ -164,7 +165,7 @@ public class EntryRepository {
                 System.out.println("No entry found for user ID: " + userId + ", book ID: " + bookId + ". Mark as read failed.");
             }
         } catch (SQLException e) {
-            System.err.println("Failed to mark book as read for user ID: " + userId + ", book ID: " + bookId + ". Error: " + e.getMessage());
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
     }
 
@@ -214,7 +215,7 @@ public class EntryRepository {
             }
 
         } catch (SQLException e) {
-            System.err.println("Error retrieving stats: " + e.getMessage());
+            System.err.println("SQL exception occurred: " + e.getMessage());
         }
 
         return stats;
