@@ -4,16 +4,11 @@ import io.javalin.Javalin;
 import io.javalin.http.staticfiles.Location;
 import io.javalin.rendering.template.JavalinThymeleaf;
 import org.project.shelfhelp.controllers.BookController;
-import org.project.shelfhelp.repositories.EntryRepository;
-import org.project.shelfhelp.repositories.GBRepository;
 import org.project.shelfhelp.controllers.EntryController;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.templateresolver.ClassLoaderTemplateResolver;
-
 import org.project.shelfhelp.controllers.UserController;
 
-
-import java.util.Map;
 
 
 public class App {
@@ -49,7 +44,6 @@ public class App {
                 .post("/setTag", EntryController::setTag)
                 .post("/markAsRead", EntryController::markAsRead)
                 .post("/deleteEntry", EntryController::deleteEntry)
-                .get("/getStats", EntryController::getStats)
                 .get("/", UserController::renderLoginForm)
                 .get("/register", UserController::renderRegisterForm)
                 .post("/login", UserController::getUser)
