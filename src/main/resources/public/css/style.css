@@ -1,5 +1,5 @@
 body{
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: system-ui;
     display: grid;
     grid-template-rows: auto 2fr;
     color: #555555;
@@ -229,11 +229,13 @@ width:70%;
 }
 
 .truncate {
-    max-width: 400px;
+    max-width: 210px;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;
+    padding-right: 15px;
 }
+
 
 
 
