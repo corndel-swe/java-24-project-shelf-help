@@ -4,7 +4,6 @@ WORKDIR /app
 
 COPY . .
 
-# Copy the SQLite DB file into the image (adjust the path as needed)
 COPY shelfhelp.db ./data/shelfhelp.db
 
 EXPOSE 8080
